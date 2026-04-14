@@ -6,6 +6,10 @@ This folder contains the main project documents for teammates.
 
 - Public website: [http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/](http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/)
 
+## GitHub Repository
+
+- Source code: [https://github.com/Shuyu-G/cloud-computing-university-learning-hub](https://github.com/Shuyu-G/cloud-computing-university-learning-hub)
+
 ## Recommended reading order
 
 1. [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md)

@@ -21,6 +21,10 @@ It explains:
 
 - Main site: [http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/](http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/)
 
+### GitHub repository
+
+- Source code and documents: [https://github.com/Shuyu-G/cloud-computing-university-learning-hub](https://github.com/Shuyu-G/cloud-computing-university-learning-hub)
+
 If the page looks old or incomplete, refresh once or do a hard refresh.
 
 ---
