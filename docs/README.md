@@ -14,23 +14,25 @@ This folder contains the main project documents for teammates.
 
 1. [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md)
    What the website does, how to log in, and how each role should use it.
-2. [REPORT_DRAFT.md](./REPORT_DRAFT.md)
+2. [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md)
+   A practical screenshot list for the report writer and presentation owner.
+3. [REPORT_DRAFT.md](./REPORT_DRAFT.md)
    Main report draft with architecture, AWS services, workflows, and screenshot suggestions.
-3. [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md)
+4. [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md)
    A 15-minute presentation script with slide order and speaking notes.
-4. [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
+5. [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
    Short project overview and local run summary.
-5. [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+6. [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
    AWS deployment guide and infrastructure setup notes.
-6. [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md)
+7. [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md)
    Internal long-form build record.
 
 ## Suggested teammate split
 
 - Report writer:
-  Focus on [REPORT_DRAFT.md](./REPORT_DRAFT.md), then use [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) and [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md) as support.
+  Focus on [REPORT_DRAFT.md](./REPORT_DRAFT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md), [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md), and [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md) as support.
 - Presentation owner:
-  Start with [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md), then use [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md) to understand the live product flow.
+  Start with [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md) and [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md) to understand the live product flow.
 
 ## Main AWS story to remember
 
