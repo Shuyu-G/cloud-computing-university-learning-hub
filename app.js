@@ -45,6 +45,8 @@ const UI_LANGUAGE_OPTIONS = [
   { code: "zh", flag: "🇨🇳", shortLabel: "中文", label: "中文" },
   { code: "de", flag: "🇩🇪", shortLabel: "DE", label: "Deutsch" },
   { code: "fr", flag: "🇫🇷", shortLabel: "FR", label: "Français" },
+  { code: "hi", flag: "🇮🇳", shortLabel: "HI", label: "हिन्दी" },
+  { code: "ar", flag: "🇸🇦", shortLabel: "AR", label: "العربية" },
 ];
 
 const UI_TEXT_TRANSLATIONS = {
@@ -169,6 +171,60 @@ const UI_TEXT_TRANSLATIONS = {
     "No due date": "无截止时间",
     "Attachment only": "仅附件",
     "No message preview": "暂无预览",
+    "Directory credentials": "目录账户信息",
+    "Teacher and student activity": "教师与学生活动",
+    "Create a new user": "创建新用户",
+    "Bulk import and export": "批量导入与导出",
+    "Recent admin and teacher actions": "管理员与教师最近操作",
+    "Online now": "当前在线",
+    "Course settings": "课程设置",
+    Enrollment: "选课管理",
+    "Record or update grades": "录入或更新成绩",
+    Teachers: "教师",
+    Students: "学生",
+    "All statuses": "全部状态",
+    "All roles": "全部角色",
+    "All levels": "全部层级",
+    "Download roster template": "下载名单模板",
+    "Download unenrollment template": "下载退课模板",
+    "Download grade template": "下载成绩模板",
+    "Download import template": "下载导入模板",
+    "Export users CSV": "导出用户 CSV",
+    "Import users CSV": "导入用户 CSV",
+    "Import enrollments CSV": "导入选课 CSV",
+    "Import unenrollments CSV": "导入退课 CSV",
+    "Import grades CSV": "导入成绩 CSV",
+    "Latest score": "最近得分",
+    "Latest result": "最近结果",
+    "Not attempted yet": "尚未作答",
+    "Not submitted yet": "尚未提交",
+    "Not submitted": "未提交",
+    "Not scheduled": "未安排",
+    "No programmes configured yet.": "尚未配置专业。",
+    "No courses created yet.": "尚未创建课程。",
+    "Admin and teacher changes will appear here once people start managing the platform.":
+      "当管理员和教师开始管理平台后，这里会显示他们的操作记录。",
+    "Announcements will appear here after teachers publish them.":
+      "教师发布公告后，这里会显示相关内容。",
+    "Course updates, roster changes, and grading actions will appear here.":
+      "课程更新、名单变动和评分操作会显示在这里。",
+    "No announcements have been posted for your courses yet.": "你的课程尚未发布任何公告。",
+    "Quiz submissions will appear here after you complete them.": "完成测验后，提交记录会显示在这里。",
+    "No feedback yet.": "暂无反馈。",
+    "No grades have been posted yet.": "尚未发布任何成绩。",
+    "No students are enrolled in this course yet.": "这门课程目前还没有学生选课。",
+    "No grade has been posted for this course yet.": "这门课程目前还没有发布成绩。",
+    "No assignments have been posted for this course yet.": "这门课程目前还没有发布作业。",
+    "No public discussion messages have been posted yet.": "公共讨论区还没有消息。",
+    "No private conversations have been started yet.": "尚未开始任何私聊会话。",
+    "No materials have been published for this course yet.": "这门课程尚未发布任何资料。",
+    "No announcements have been posted for this course yet.": "这门课程尚未发布任何公告。",
+    "No quizzes are available yet.": "目前还没有可用测验。",
+    "No submission yet": "尚未提交",
+    "No private messages have been sent in this conversation yet.": "该会话中尚未发送任何私信。",
+    "No attempt submitted yet": "尚未提交作答",
+    "No students have submitted this quiz yet.": "目前还没有学生提交这个测验。",
+    "You have been signed out.": "你已退出登录。",
   },
   de: {
     Dashboard: "Dashboard",
@@ -291,6 +347,60 @@ const UI_TEXT_TRANSLATIONS = {
     "No due date": "Kein Fälligkeitsdatum",
     "Attachment only": "Nur Anhang",
     "No message preview": "Keine Vorschau",
+    "Directory credentials": "Verzeichniszugänge",
+    "Teacher and student activity": "Aktivität von Lehrenden und Studierenden",
+    "Create a new user": "Neuen Benutzer anlegen",
+    "Bulk import and export": "Massenimport und -export",
+    "Recent admin and teacher actions": "Letzte Admin- und Lehrenden-Aktionen",
+    "Online now": "Jetzt online",
+    "Course settings": "Kurseinstellungen",
+    Enrollment: "Einschreibung",
+    "Record or update grades": "Noten erfassen oder aktualisieren",
+    Teachers: "Lehrende",
+    Students: "Studierende",
+    "All statuses": "Alle Status",
+    "All roles": "Alle Rollen",
+    "All levels": "Alle Ebenen",
+    "Download roster template": "Vorlage für Teilnehmerliste herunterladen",
+    "Download unenrollment template": "Vorlage für Abmeldungen herunterladen",
+    "Download grade template": "Vorlage für Noten herunterladen",
+    "Download import template": "Importvorlage herunterladen",
+    "Export users CSV": "Benutzer-CSV exportieren",
+    "Import users CSV": "Benutzer-CSV importieren",
+    "Import enrollments CSV": "Einschreibungs-CSV importieren",
+    "Import unenrollments CSV": "Abmelde-CSV importieren",
+    "Import grades CSV": "Noten-CSV importieren",
+    "Latest score": "Letztes Ergebnis",
+    "Latest result": "Letztes Resultat",
+    "Not attempted yet": "Noch nicht versucht",
+    "Not submitted yet": "Noch nicht eingereicht",
+    "Not submitted": "Nicht eingereicht",
+    "Not scheduled": "Nicht geplant",
+    "No programmes configured yet.": "Noch keine Studiengänge konfiguriert.",
+    "No courses created yet.": "Noch keine Kurse erstellt.",
+    "Admin and teacher changes will appear here once people start managing the platform.":
+      "Hier erscheinen Änderungen von Admins und Lehrenden, sobald die Plattform aktiv genutzt wird.",
+    "Announcements will appear here after teachers publish them.":
+      "Hier erscheinen Ankündigungen, sobald Lehrende sie veröffentlichen.",
+    "Course updates, roster changes, and grading actions will appear here.":
+      "Kursupdates, Listenänderungen und Bewertungsaktionen erscheinen hier.",
+    "No announcements have been posted for your courses yet.": "Für Ihre Kurse wurden noch keine Ankündigungen veröffentlicht.",
+    "Quiz submissions will appear here after you complete them.": "Quiz-Einreichungen erscheinen hier, sobald Sie sie abgeschlossen haben.",
+    "No feedback yet.": "Noch kein Feedback.",
+    "No grades have been posted yet.": "Es wurden noch keine Noten veröffentlicht.",
+    "No students are enrolled in this course yet.": "In diesen Kurs sind noch keine Studierenden eingeschrieben.",
+    "No grade has been posted for this course yet.": "Für diesen Kurs wurde noch keine Note veröffentlicht.",
+    "No assignments have been posted for this course yet.": "Für diesen Kurs wurden noch keine Aufgaben veröffentlicht.",
+    "No public discussion messages have been posted yet.": "Es wurden noch keine öffentlichen Diskussionsnachrichten veröffentlicht.",
+    "No private conversations have been started yet.": "Es wurden noch keine privaten Gespräche begonnen.",
+    "No materials have been published for this course yet.": "Für diesen Kurs wurden noch keine Materialien veröffentlicht.",
+    "No announcements have been posted for this course yet.": "Für diesen Kurs wurden noch keine Ankündigungen veröffentlicht.",
+    "No quizzes are available yet.": "Es sind noch keine Quizze verfügbar.",
+    "No submission yet": "Noch keine Einreichung",
+    "No private messages have been sent in this conversation yet.": "In dieser Unterhaltung wurden noch keine privaten Nachrichten gesendet.",
+    "No attempt submitted yet": "Noch kein Versuch eingereicht",
+    "No students have submitted this quiz yet.": "Noch keine Studierenden haben dieses Quiz eingereicht.",
+    "You have been signed out.": "Sie wurden abgemeldet.",
   },
   fr: {
     Dashboard: "Tableau de bord",
@@ -413,6 +523,412 @@ const UI_TEXT_TRANSLATIONS = {
     "No due date": "Aucune date limite",
     "Attachment only": "Pièce jointe uniquement",
     "No message preview": "Aucun aperçu",
+    "Directory credentials": "Identifiants de l'annuaire",
+    "Teacher and student activity": "Activité des enseignants et étudiants",
+    "Create a new user": "Créer un nouvel utilisateur",
+    "Bulk import and export": "Import et export en masse",
+    "Recent admin and teacher actions": "Actions récentes des admins et enseignants",
+    "Online now": "En ligne maintenant",
+    "Course settings": "Paramètres du cours",
+    Enrollment: "Inscriptions",
+    "Record or update grades": "Saisir ou mettre à jour les notes",
+    Teachers: "Enseignants",
+    Students: "Étudiants",
+    "All statuses": "Tous les statuts",
+    "All roles": "Tous les rôles",
+    "All levels": "Tous les niveaux",
+    "Download roster template": "Télécharger le modèle de liste",
+    "Download unenrollment template": "Télécharger le modèle de désinscription",
+    "Download grade template": "Télécharger le modèle de notes",
+    "Download import template": "Télécharger le modèle d'import",
+    "Export users CSV": "Exporter les utilisateurs en CSV",
+    "Import users CSV": "Importer les utilisateurs en CSV",
+    "Import enrollments CSV": "Importer les inscriptions CSV",
+    "Import unenrollments CSV": "Importer les désinscriptions CSV",
+    "Import grades CSV": "Importer les notes CSV",
+    "Latest score": "Dernier score",
+    "Latest result": "Dernier résultat",
+    "Not attempted yet": "Pas encore tenté",
+    "Not submitted yet": "Pas encore remis",
+    "Not submitted": "Non remis",
+    "Not scheduled": "Non planifié",
+    "No programmes configured yet.": "Aucun programme n'est encore configuré.",
+    "No courses created yet.": "Aucun cours n'a encore été créé.",
+    "Admin and teacher changes will appear here once people start managing the platform.":
+      "Les changements effectués par les admins et enseignants apparaîtront ici dès que la plateforme sera utilisée.",
+    "Announcements will appear here after teachers publish them.":
+      "Les annonces apparaîtront ici une fois publiées par les enseignants.",
+    "Course updates, roster changes, and grading actions will appear here.":
+      "Les mises à jour du cours, changements d'effectif et actions de notation apparaîtront ici.",
+    "No announcements have been posted for your courses yet.": "Aucune annonce n'a encore été publiée pour vos cours.",
+    "Quiz submissions will appear here after you complete them.": "Les remises de quiz apparaîtront ici après leur complétion.",
+    "No feedback yet.": "Aucun retour pour le moment.",
+    "No grades have been posted yet.": "Aucune note n'a encore été publiée.",
+    "No students are enrolled in this course yet.": "Aucun étudiant n'est encore inscrit à ce cours.",
+    "No grade has been posted for this course yet.": "Aucune note n'a encore été publiée pour ce cours.",
+    "No assignments have been posted for this course yet.": "Aucun travail n'a encore été publié pour ce cours.",
+    "No public discussion messages have been posted yet.": "Aucun message n'a encore été publié dans la discussion publique.",
+    "No private conversations have been started yet.": "Aucune conversation privée n'a encore commencé.",
+    "No materials have been published for this course yet.": "Aucun document n'a encore été publié pour ce cours.",
+    "No announcements have been posted for this course yet.": "Aucune annonce n'a encore été publiée pour ce cours.",
+    "No quizzes are available yet.": "Aucun quiz n'est encore disponible.",
+    "No submission yet": "Aucun dépôt pour le moment",
+    "No private messages have been sent in this conversation yet.": "Aucun message privé n'a encore été envoyé dans cette conversation.",
+    "No attempt submitted yet": "Aucune tentative soumise pour le moment",
+    "No students have submitted this quiz yet.": "Aucun étudiant n'a encore soumis ce quiz.",
+    "You have been signed out.": "Vous avez été déconnecté.",
+  },
+  hi: {
+    Dashboard: "डैशबोर्ड",
+    "Log out": "लॉग आउट",
+    Login: "लॉगिन",
+    Email: "ईमेल",
+    Password: "पासवर्ड",
+    "Sign in": "साइन इन",
+    "Admin operations center": "एडमिन संचालन केंद्र",
+    "Teacher Dashboard": "शिक्षक डैशबोर्ड",
+    "Student Dashboard": "छात्र डैशबोर्ड",
+    People: "लोग",
+    Provisioning: "प्रबंधन",
+    Curriculum: "पाठ्यक्रम",
+    Oversight: "निगरानी",
+    Create: "बनाएँ",
+    Courses: "कोर्स",
+    Updates: "अपडेट",
+    Audit: "लॉग",
+    Overview: "सारांश",
+    Manage: "प्रबंधन",
+    "Students & Grades": "छात्र और ग्रेड",
+    Content: "सामग्री",
+    Assignments: "असाइनमेंट",
+    Messages: "संदेश",
+    Grade: "ग्रेड",
+    "Create a course": "कोर्स बनाएँ",
+    "Create course": "कोर्स बनाएँ",
+    "All live courses": "सभी सक्रिय कोर्स",
+    "Recent course news": "हाल की कोर्स घोषणाएँ",
+    "Managed courses": "प्रबंधित कोर्स",
+    "Your classroom spaces": "आपके कक्षा क्षेत्र",
+    "Recent teacher updates": "शिक्षक के हाल के अपडेट",
+    "My recent actions": "मेरी हाल की गतिविधियाँ",
+    "My courses": "मेरे कोर्स",
+    "Study spaces": "अध्ययन क्षेत्र",
+    Announcements: "घोषणाएँ",
+    "Latest course notices": "नवीनतम कोर्स सूचनाएँ",
+    "Recent quiz results": "हाल के क्विज़ परिणाम",
+    Grades: "ग्रेड",
+    "Recorded marks": "दर्ज अंक",
+    "Course grades": "कोर्स ग्रेड",
+    "Student activity": "छात्र गतिविधि",
+    "Course files": "कोर्स फ़ाइलें",
+    "Materials and downloadable courseware": "सामग्री और डाउनलोड करने योग्य पाठ्यसामग्री",
+    "Announcement board": "घोषणा बोर्ड",
+    "Latest notices": "नवीनतम सूचनाएँ",
+    Quizzes: "क्विज़",
+    "Assessments for this course": "इस कोर्स के आकलन",
+    "Public channel": "सार्वजनिक चैनल",
+    "Course discussion board": "कोर्स चर्चा बोर्ड",
+    "Private chat": "निजी चैट",
+    "Direct messages with teachers and students": "शिक्षकों और छात्रों के साथ निजी संदेश",
+    "Private messages with teachers": "शिक्षकों के साथ निजी संदेश",
+    "Submission tracking and grading": "सबमिशन ट्रैकिंग और ग्रेडिंग",
+    "Open assignments and my submissions": "असाइनमेंट और मेरे सबमिशन",
+    "Submit coursework to cloud storage": "कोर्सवर्क को क्लाउड स्टोरेज में जमा करें",
+    "Create assignment": "असाइनमेंट बनाएँ",
+    "Open assignment": "असाइनमेंट खोलें",
+    "Open course": "कोर्स खोलें",
+    "Open quiz": "क्विज़ खोलें",
+    "Open conversation": "वार्तालाप खोलें",
+    Edit: "संपादित करें",
+    Delete: "हटाएँ",
+    Download: "डाउनलोड",
+    "Download my submission": "मेरा सबमिशन डाउनलोड करें",
+    "Save grade": "ग्रेड सहेजें",
+    Previous: "पिछला",
+    Next: "अगला",
+    "Expand all": "सब खोलें",
+    "Collapse all": "सब समेटें",
+    "Post announcement": "घोषणा पोस्ट करें",
+    "Post to course chat": "कोर्स चैट में पोस्ट करें",
+    "Send private message": "निजी संदेश भेजें",
+    "Send message": "संदेश भेजें",
+    Recipient: "प्राप्तकर्ता",
+    Message: "संदेश",
+    Attachment: "संलग्नक",
+    "Submission file": "सबमिशन फ़ाइल",
+    "Due date": "अंतिम तिथि",
+    Description: "विवरण",
+    "Course title": "कोर्स शीर्षक",
+    "Course code": "कोर्स कोड",
+    "Study level": "अध्ययन स्तर",
+    "Programme / major": "प्रोग्राम / मेजर",
+    Schedule: "समय-सारणी",
+    "Search course, code, teacher": "कोर्स, कोड या शिक्षक खोजें",
+    "Search student name or email": "छात्र का नाम या ईमेल खोजें",
+    "Search student, email, or grade": "छात्र, ईमेल या ग्रेड खोजें",
+    "Search files, titles, or uploaders": "फ़ाइल, शीर्षक या अपलोडर खोजें",
+    "Search announcements": "घोषणाएँ खोजें",
+    "Search quizzes": "क्विज़ खोजें",
+    "Search assignments": "असाइनमेंट खोजें",
+    "Enter your password": "अपना पासवर्ड दर्ज करें",
+    "All programmes": "सभी प्रोग्राम",
+    Undergraduate: "स्नातक",
+    Graduate: "स्नातकोत्तर",
+    "Online first": "पहले ऑनलाइन",
+    "Recently seen": "हाल ही में देखा गया",
+    "Least recent": "सबसे पुराना",
+    "Newest first": "सबसे नया पहले",
+    "Newest uploads": "नवीनतम अपलोड",
+    "Oldest uploads": "सबसे पुराने अपलोड",
+    "Newest posts": "नवीनतम पोस्ट",
+    "Oldest posts": "सबसे पुरानी पोस्ट",
+    "Due soonest": "सबसे पहले देय",
+    "Due latest": "सबसे बाद में देय",
+    "Title A-Z": "शीर्षक A-Z",
+    "Author A-Z": "लेखक A-Z",
+    "Uploader A-Z": "अपलोडर A-Z",
+    "Most attempts": "सबसे अधिक प्रयास",
+    "Name A-Z": "नाम A-Z",
+    "Name Z-A": "नाम Z-A",
+    "All results": "सभी परिणाम",
+    Graded: "ग्रेडेड",
+    "Not graded": "ग्रेड नहीं किया गया",
+    Online: "ऑनलाइन",
+    Offline: "ऑफ़लाइन",
+    Never: "कभी नहीं",
+    "No due date": "कोई अंतिम तिथि नहीं",
+    "Attachment only": "केवल संलग्नक",
+    "No message preview": "कोई संदेश पूर्वावलोकन नहीं",
+    "Directory credentials": "डायरेक्टरी क्रेडेंशियल्स",
+    "Teacher and student activity": "शिक्षक और छात्र गतिविधि",
+    "Create a new user": "नया उपयोगकर्ता बनाएँ",
+    "Bulk import and export": "थोक आयात और निर्यात",
+    "Recent admin and teacher actions": "एडमिन और शिक्षक की हाल की गतिविधियाँ",
+    "Online now": "अभी ऑनलाइन",
+    "Course settings": "कोर्स सेटिंग्स",
+    Enrollment: "नामांकन",
+    "Record or update grades": "ग्रेड दर्ज या अपडेट करें",
+    Teachers: "शिक्षक",
+    Students: "छात्र",
+    "All statuses": "सभी स्थितियाँ",
+    "All roles": "सभी भूमिकाएँ",
+    "All levels": "सभी स्तर",
+    "Download roster template": "रोस्टर टेम्पलेट डाउनलोड करें",
+    "Download unenrollment template": "अनएनरोलमेंट टेम्पलेट डाउनलोड करें",
+    "Download grade template": "ग्रेड टेम्पलेट डाउनलोड करें",
+    "Download import template": "आयात टेम्पलेट डाउनलोड करें",
+    "Export users CSV": "उपयोगकर्ता CSV निर्यात करें",
+    "Import users CSV": "उपयोगकर्ता CSV आयात करें",
+    "Import enrollments CSV": "एनरोलमेंट CSV आयात करें",
+    "Import unenrollments CSV": "अनएनरोलमेंट CSV आयात करें",
+    "Import grades CSV": "ग्रेड CSV आयात करें",
+    "Latest score": "नवीनतम स्कोर",
+    "Latest result": "नवीनतम परिणाम",
+    "Not attempted yet": "अभी तक प्रयास नहीं किया गया",
+    "Not submitted yet": "अभी तक जमा नहीं किया गया",
+    "Not submitted": "जमा नहीं किया गया",
+    "Not scheduled": "निर्धारित नहीं",
+    "No programmes configured yet.": "अभी तक कोई प्रोग्राम कॉन्फ़िगर नहीं किया गया है।",
+    "No courses created yet.": "अभी तक कोई कोर्स नहीं बनाया गया है।",
+    "Admin and teacher changes will appear here once people start managing the platform.":
+      "जैसे ही लोग प्लेटफ़ॉर्म प्रबंधित करना शुरू करेंगे, एडमिन और शिक्षक के बदलाव यहाँ दिखाई देंगे।",
+    "Announcements will appear here after teachers publish them.":
+      "शिक्षकों द्वारा प्रकाशित करने के बाद घोषणाएँ यहाँ दिखाई देंगी।",
+    "Course updates, roster changes, and grading actions will appear here.":
+      "कोर्स अपडेट, रोस्टर परिवर्तन और ग्रेडिंग गतिविधियाँ यहाँ दिखाई देंगी।",
+    "No announcements have been posted for your courses yet.": "आपके कोर्स के लिए अभी तक कोई घोषणा पोस्ट नहीं की गई है।",
+    "Quiz submissions will appear here after you complete them.": "क्विज़ पूरा करने के बाद उसके सबमिशन यहाँ दिखाई देंगे।",
+    "No feedback yet.": "अभी तक कोई फीडबैक नहीं।",
+    "No grades have been posted yet.": "अभी तक कोई ग्रेड पोस्ट नहीं किया गया है।",
+    "No students are enrolled in this course yet.": "इस कोर्स में अभी तक कोई छात्र नामांकित नहीं है।",
+    "No grade has been posted for this course yet.": "इस कोर्स के लिए अभी तक कोई ग्रेड पोस्ट नहीं किया गया है।",
+    "No assignments have been posted for this course yet.": "इस कोर्स के लिए अभी तक कोई असाइनमेंट पोस्ट नहीं किया गया है।",
+    "No public discussion messages have been posted yet.": "अभी तक कोई सार्वजनिक चर्चा संदेश पोस्ट नहीं किया गया है।",
+    "No private conversations have been started yet.": "अभी तक कोई निजी बातचीत शुरू नहीं हुई है।",
+    "No materials have been published for this course yet.": "इस कोर्स के लिए अभी तक कोई सामग्री प्रकाशित नहीं की गई है।",
+    "No announcements have been posted for this course yet.": "इस कोर्स के लिए अभी तक कोई घोषणा पोस्ट नहीं की गई है।",
+    "No quizzes are available yet.": "अभी तक कोई क्विज़ उपलब्ध नहीं है।",
+    "No submission yet": "अभी तक कोई सबमिशन नहीं",
+    "No private messages have been sent in this conversation yet.": "इस वार्तालाप में अभी तक कोई निजी संदेश नहीं भेजा गया है।",
+    "No attempt submitted yet": "अभी तक कोई प्रयास जमा नहीं किया गया है",
+    "No students have submitted this quiz yet.": "अभी तक किसी छात्र ने यह क्विज़ जमा नहीं किया है।",
+    "You have been signed out.": "आपको साइन आउट कर दिया गया है।",
+  },
+  ar: {
+    Dashboard: "لوحة التحكم",
+    "Log out": "تسجيل الخروج",
+    Login: "تسجيل الدخول",
+    Email: "البريد الإلكتروني",
+    Password: "كلمة المرور",
+    "Sign in": "دخول",
+    "Admin operations center": "مركز إدارة المنصة",
+    "Teacher Dashboard": "لوحة المعلم",
+    "Student Dashboard": "لوحة الطالب",
+    People: "الأشخاص",
+    Provisioning: "الإعداد",
+    Curriculum: "البرامج",
+    Oversight: "المتابعة",
+    Create: "إنشاء",
+    Courses: "المقررات",
+    Updates: "التحديثات",
+    Audit: "السجل",
+    Overview: "نظرة عامة",
+    Manage: "إدارة",
+    "Students & Grades": "الطلاب والدرجات",
+    Content: "المحتوى",
+    Assignments: "الواجبات",
+    Messages: "الرسائل",
+    Grade: "الدرجة",
+    "Create a course": "إنشاء مقرر",
+    "Create course": "إنشاء مقرر",
+    "All live courses": "كل المقررات النشطة",
+    "Recent course news": "أحدث أخبار المقررات",
+    "Managed courses": "المقررات المُدارة",
+    "Your classroom spaces": "مساحاتك الصفية",
+    "Recent teacher updates": "آخر تحديثات المعلمين",
+    "My recent actions": "آخر إجراءاتي",
+    "My courses": "مقرراتي",
+    "Study spaces": "مساحات الدراسة",
+    Announcements: "الإعلانات",
+    "Latest course notices": "أحدث إشعارات المقررات",
+    "Recent quiz results": "أحدث نتائج الاختبارات القصيرة",
+    Grades: "الدرجات",
+    "Recorded marks": "الدرجات المسجلة",
+    "Course grades": "درجات المقرر",
+    "Student activity": "نشاط الطلاب",
+    "Course files": "ملفات المقرر",
+    "Materials and downloadable courseware": "المواد والملفات القابلة للتنزيل",
+    "Announcement board": "لوحة الإعلانات",
+    "Latest notices": "أحدث الإشعارات",
+    Quizzes: "الاختبارات القصيرة",
+    "Assessments for this course": "التقييمات الخاصة بهذا المقرر",
+    "Public channel": "القناة العامة",
+    "Course discussion board": "لوحة نقاش المقرر",
+    "Private chat": "دردشة خاصة",
+    "Direct messages with teachers and students": "رسائل مباشرة مع المعلمين والطلاب",
+    "Private messages with teachers": "رسائل خاصة مع المعلمين",
+    "Submission tracking and grading": "متابعة التسليم والتقييم",
+    "Open assignments and my submissions": "الواجبات وملفاتي المسلمة",
+    "Submit coursework to cloud storage": "رفع أعمال المقرر إلى التخزين السحابي",
+    "Create assignment": "إنشاء واجب",
+    "Open assignment": "فتح الواجب",
+    "Open course": "فتح المقرر",
+    "Open quiz": "فتح الاختبار القصير",
+    "Open conversation": "فتح المحادثة",
+    Edit: "تعديل",
+    Delete: "حذف",
+    Download: "تنزيل",
+    "Download my submission": "تنزيل ملف التسليم الخاص بي",
+    "Save grade": "حفظ الدرجة",
+    Previous: "السابق",
+    Next: "التالي",
+    "Expand all": "توسيع الكل",
+    "Collapse all": "طي الكل",
+    "Post announcement": "نشر إعلان",
+    "Post to course chat": "إرسال إلى دردشة المقرر",
+    "Send private message": "إرسال رسالة خاصة",
+    "Send message": "إرسال الرسالة",
+    Recipient: "المستلم",
+    Message: "الرسالة",
+    Attachment: "مرفق",
+    "Submission file": "ملف التسليم",
+    "Due date": "تاريخ الاستحقاق",
+    Description: "الوصف",
+    "Course title": "عنوان المقرر",
+    "Course code": "رمز المقرر",
+    "Study level": "المرحلة الدراسية",
+    "Programme / major": "البرنامج / التخصص",
+    Schedule: "الموعد",
+    "Search course, code, teacher": "ابحث عن مقرر أو رمز أو معلم",
+    "Search student name or email": "ابحث عن اسم الطالب أو بريده الإلكتروني",
+    "Search student, email, or grade": "ابحث عن طالب أو بريد إلكتروني أو درجة",
+    "Search files, titles, or uploaders": "ابحث عن الملفات أو العناوين أو الرافعين",
+    "Search announcements": "ابحث في الإعلانات",
+    "Search quizzes": "ابحث في الاختبارات القصيرة",
+    "Search assignments": "ابحث في الواجبات",
+    "Enter your password": "أدخل كلمة المرور",
+    "All programmes": "كل البرامج",
+    Undergraduate: "بكالوريوس",
+    Graduate: "دراسات عليا",
+    "Online first": "المتصلون أولاً",
+    "Recently seen": "شوهد مؤخراً",
+    "Least recent": "الأقدم",
+    "Newest first": "الأحدث أولاً",
+    "Newest uploads": "أحدث الملفات المرفوعة",
+    "Oldest uploads": "أقدم الملفات المرفوعة",
+    "Newest posts": "أحدث المنشورات",
+    "Oldest posts": "أقدم المنشورات",
+    "Due soonest": "الأقرب استحقاقاً",
+    "Due latest": "الأبعد استحقاقاً",
+    "Title A-Z": "العنوان أ-ي",
+    "Author A-Z": "الكاتب أ-ي",
+    "Uploader A-Z": "الرافع أ-ي",
+    "Most attempts": "الأكثر محاولات",
+    "Name A-Z": "الاسم أ-ي",
+    "Name Z-A": "الاسم ي-أ",
+    "All results": "كل النتائج",
+    Graded: "تم التقييم",
+    "Not graded": "غير مُقيَّم",
+    Online: "متصل",
+    Offline: "غير متصل",
+    Never: "أبداً",
+    "No due date": "لا يوجد تاريخ استحقاق",
+    "Attachment only": "مرفق فقط",
+    "No message preview": "لا توجد معاينة للرسالة",
+    "Directory credentials": "بيانات اعتماد الدليل",
+    "Teacher and student activity": "نشاط المعلمين والطلاب",
+    "Create a new user": "إنشاء مستخدم جديد",
+    "Bulk import and export": "استيراد وتصدير جماعي",
+    "Recent admin and teacher actions": "أحدث إجراءات المدير والمعلمين",
+    "Online now": "المتصلون الآن",
+    "Course settings": "إعدادات المقرر",
+    Enrollment: "التسجيل",
+    "Record or update grades": "إدخال الدرجات أو تحديثها",
+    Teachers: "المعلمون",
+    Students: "الطلاب",
+    "All statuses": "كل الحالات",
+    "All roles": "كل الأدوار",
+    "All levels": "كل المراحل",
+    "Download roster template": "تنزيل قالب القائمة",
+    "Download unenrollment template": "تنزيل قالب إلغاء التسجيل",
+    "Download grade template": "تنزيل قالب الدرجات",
+    "Download import template": "تنزيل قالب الاستيراد",
+    "Export users CSV": "تصدير المستخدمين CSV",
+    "Import users CSV": "استيراد المستخدمين CSV",
+    "Import enrollments CSV": "استيراد تسجيلات CSV",
+    "Import unenrollments CSV": "استيراد إلغاء التسجيل CSV",
+    "Import grades CSV": "استيراد الدرجات CSV",
+    "Latest score": "أحدث نتيجة",
+    "Latest result": "أحدث نتيجة",
+    "Not attempted yet": "لم تتم المحاولة بعد",
+    "Not submitted yet": "لم يتم التسليم بعد",
+    "Not submitted": "غير مُسلَّم",
+    "Not scheduled": "غير مجدول",
+    "No programmes configured yet.": "لم يتم إعداد أي برامج بعد.",
+    "No courses created yet.": "لم يتم إنشاء أي مقررات بعد.",
+    "Admin and teacher changes will appear here once people start managing the platform.":
+      "ستظهر هنا تغييرات المدير والمعلمين بمجرد بدء استخدام المنصة وإدارتها.",
+    "Announcements will appear here after teachers publish them.":
+      "ستظهر الإعلانات هنا بعد أن يقوم المعلمون بنشرها.",
+    "Course updates, roster changes, and grading actions will appear here.":
+      "ستظهر هنا تحديثات المقرر وتغييرات القوائم وإجراءات التقييم.",
+    "No announcements have been posted for your courses yet.": "لم يتم نشر أي إعلانات لمقرراتك بعد.",
+    "Quiz submissions will appear here after you complete them.": "ستظهر تسليمات الاختبارات القصيرة هنا بعد إكمالها.",
+    "No feedback yet.": "لا توجد ملاحظات بعد.",
+    "No grades have been posted yet.": "لم يتم نشر أي درجات بعد.",
+    "No students are enrolled in this course yet.": "لا يوجد طلاب مسجلون في هذا المقرر بعد.",
+    "No grade has been posted for this course yet.": "لم يتم نشر أي درجة لهذا المقرر بعد.",
+    "No assignments have been posted for this course yet.": "لم يتم نشر أي واجبات لهذا المقرر بعد.",
+    "No public discussion messages have been posted yet.": "لم يتم نشر أي رسائل في النقاش العام بعد.",
+    "No private conversations have been started yet.": "لم تبدأ أي محادثات خاصة بعد.",
+    "No materials have been published for this course yet.": "لم يتم نشر أي مواد لهذا المقرر بعد.",
+    "No announcements have been posted for this course yet.": "لم يتم نشر أي إعلانات لهذا المقرر بعد.",
+    "No quizzes are available yet.": "لا توجد اختبارات قصيرة متاحة بعد.",
+    "No submission yet": "لا يوجد تسليم بعد",
+    "No private messages have been sent in this conversation yet.": "لم يتم إرسال أي رسائل خاصة في هذه المحادثة بعد.",
+    "No attempt submitted yet": "لم يتم إرسال أي محاولة بعد",
+    "No students have submitted this quiz yet.": "لم يقم أي طالب بتسليم هذا الاختبار القصير بعد.",
+    "You have been signed out.": "تم تسجيل خروجك.",
   },
 };
 
@@ -2394,11 +2910,26 @@ function renderDashboardScripts() {
         applyFilters();
       }
 
+      function browserLocaleCode() {
+        const value = String(
+          window.__uiLocale ||
+            document.documentElement.getAttribute('data-ui-locale') ||
+            document.documentElement.lang ||
+            'en'
+        ).toLowerCase();
+        if (value.startsWith('zh')) return 'zh-CN';
+        if (value.startsWith('de')) return 'de-DE';
+        if (value.startsWith('fr')) return 'fr-FR';
+        if (value.startsWith('hi')) return 'hi-IN';
+        if (value.startsWith('ar')) return 'ar-SA';
+        return 'en-GB';
+      }
+
       function formatBrowserDateTime(value, fallback) {
         if (!value) return fallback;
         const date = new Date(value);
         if (Number.isNaN(date.getTime())) return fallback;
-        return new Intl.DateTimeFormat('en-US', {
+        return new Intl.DateTimeFormat(browserLocaleCode(), {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
@@ -2554,6 +3085,21 @@ function renderPage({
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
+      }
+
+      html[dir="rtl"] body {
+        direction: rtl;
+      }
+
+      html[dir="rtl"] input,
+      html[dir="rtl"] textarea,
+      html[dir="rtl"] select {
+        text-align: right;
+      }
+
+      html[dir="rtl"] .mono {
+        direction: ltr;
+        unicode-bidi: plaintext;
       }
 
       body::before,
@@ -3488,6 +4034,14 @@ function renderPage({
           return option.code;
         }));
         const localeButtons = Array.from(document.querySelectorAll('[data-locale]'));
+        const localeFormatCodes = {
+          en: 'en-GB',
+          zh: 'zh-CN',
+          de: 'de-DE',
+          fr: 'fr-FR',
+          hi: 'hi-IN',
+          ar: 'ar-SA',
+        };
 
         function resolveLocale(candidate) {
           const value = String(candidate || '').toLowerCase();
@@ -3495,7 +4049,73 @@ function renderPage({
           if (value.startsWith('zh')) return 'zh';
           if (value.startsWith('de')) return 'de';
           if (value.startsWith('fr')) return 'fr';
+          if (value.startsWith('hi')) return 'hi';
+          if (value.startsWith('ar')) return 'ar';
           return 'en';
+        }
+
+        function localeFormatCode(locale) {
+          return localeFormatCodes[resolveLocale(locale)] || 'en-GB';
+        }
+
+        function translateExact(source, locale) {
+          return textTranslations[locale] && textTranslations[locale][source];
+        }
+
+        function looksLikeDateText(source) {
+          return /(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}(?:\s+at\s+\d{2}:\d{2})?/i.test(
+            source
+          ) || /\b\d{4}-\d{2}-\d{2}(?:[ T]\d{2}:\d{2}(?::\d{2})?)?\b/.test(source);
+        }
+
+        function formatLocaleDateTime(source, locale) {
+          const value = String(source || '').trim();
+          if (!value || !looksLikeDateText(value)) return '';
+
+          let normalized = value.replace(/\s+at\s+/i, ' ');
+          let date = new Date(normalized);
+          if (Number.isNaN(date.getTime())) {
+            normalized = normalized.replace(
+              /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})(?::\d{2})?/,
+              '$1T$2:00'
+            );
+            date = new Date(normalized);
+          }
+          if (Number.isNaN(date.getTime())) return '';
+
+          return new Intl.DateTimeFormat(localeFormatCode(locale), {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+            timeZone: 'Europe/Berlin',
+          }).format(date);
+        }
+
+        function localizeFragment(source, locale) {
+          const value = String(source || '');
+          if (!value) return value;
+          const exact = translateExact(value, locale);
+          if (exact) return exact;
+          return formatLocaleDateTime(value, locale) || value;
+        }
+
+        function translateEmbeddedDates(source, locale) {
+          let output = String(source || '');
+          const patterns = [
+            /(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}(?:\s+at\s+\d{2}:\d{2})?/g,
+            /\b\d{4}-\d{2}-\d{2}(?:[ T]\d{2}:\d{2}(?::\d{2})?)?\b/g,
+          ];
+
+          patterns.forEach(function (pattern) {
+            output = output.replace(pattern, function (match) {
+              return formatLocaleDateTime(match, locale) || match;
+            });
+          });
+
+          return output;
         }
 
         function translatePattern(source, locale) {
@@ -3507,6 +4127,8 @@ function renderPage({
                   zh: '显示 ' + count + ' 条结果',
                   de: count + ' Treffer angezeigt',
                   fr: count + ' résultats affichés',
+                  hi: count + ' परिणाम दिखाए जा रहे हैं',
+                  ar: 'عرض ' + count + ' نتيجة',
                 }[locale];
               },
             },
@@ -3517,6 +4139,8 @@ function renderPage({
                   zh: '显示 ' + visible + ' / ' + total,
                   de: visible + ' von ' + total + ' angezeigt',
                   fr: visible + ' sur ' + total + ' affichés',
+                  hi: visible + ' / ' + total + ' दिखाया जा रहा है',
+                  ar: 'عرض ' + visible + ' من ' + total,
                 }[locale];
               },
             },
@@ -3527,6 +4151,8 @@ function renderPage({
                   zh: '第 ' + page + ' / ' + total + ' 页',
                   de: 'Seite ' + page + ' von ' + total,
                   fr: 'Page ' + page + ' sur ' + total,
+                  hi: 'पृष्ठ ' + page + ' / ' + total,
+                  ar: 'الصفحة ' + page + ' من ' + total,
                 }[locale];
               },
             },
@@ -3537,6 +4163,8 @@ function renderPage({
                   zh: count + ' 名学生',
                   de: count + ' Studierende',
                   fr: count + ' étudiants',
+                  hi: count + ' छात्र',
+                  ar: count + ' طلاب',
                 }[locale];
               },
             },
@@ -3547,6 +4175,32 @@ function renderPage({
                   zh: count + ' 门课程',
                   de: count + ' Kurse',
                   fr: count + ' cours',
+                  hi: count + ' कोर्स',
+                  ar: count + ' مقررات',
+                }[locale];
+              },
+            },
+            {
+              regex: /^Teachers \((\d+)\)$/,
+              render: function (_, count) {
+                return {
+                  zh: '教师（' + count + '）',
+                  de: 'Lehrende (' + count + ')',
+                  fr: 'Enseignants (' + count + ')',
+                  hi: 'शिक्षक (' + count + ')',
+                  ar: 'المعلمون (' + count + ')',
+                }[locale];
+              },
+            },
+            {
+              regex: /^Students \((\d+)\)$/,
+              render: function (_, count) {
+                return {
+                  zh: '学生（' + count + '）',
+                  de: 'Studierende (' + count + ')',
+                  fr: 'Étudiants (' + count + ')',
+                  hi: 'छात्र (' + count + ')',
+                  ar: 'الطلاب (' + count + ')',
                 }[locale];
               },
             },
@@ -3557,6 +4211,95 @@ function renderPage({
                   zh: '题目数：' + count,
                   de: 'Fragen: ' + count,
                   fr: 'Questions : ' + count,
+                  hi: 'प्रश्न: ' + count,
+                  ar: 'الأسئلة: ' + count,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Level: (.+)$/,
+              render: function (_, value) {
+                const localizedValue = localizeFragment(value, locale);
+                return {
+                  zh: '层级：' + localizedValue,
+                  de: 'Ebene: ' + localizedValue,
+                  fr: 'Niveau : ' + localizedValue,
+                  hi: 'स्तर: ' + localizedValue,
+                  ar: 'المرحلة: ' + localizedValue,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Program: (.+)$/,
+              render: function (_, value) {
+                return {
+                  zh: '专业：' + value,
+                  de: 'Programm: ' + value,
+                  fr: 'Programme : ' + value,
+                  hi: 'प्रोग्राम: ' + value,
+                  ar: 'البرنامج: ' + value,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Teacher: (.+)$/,
+              render: function (_, value) {
+                return {
+                  zh: '教师：' + value,
+                  de: 'Lehrperson: ' + value,
+                  fr: 'Enseignant : ' + value,
+                  hi: 'शिक्षक: ' + value,
+                  ar: 'المعلم: ' + value,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Schedule: (.+)$/,
+              render: function (_, value) {
+                const localizedValue = localizeFragment(value, locale);
+                return {
+                  zh: '时间：' + localizedValue,
+                  de: 'Termin: ' + localizedValue,
+                  fr: 'Horaire : ' + localizedValue,
+                  hi: 'समय: ' + localizedValue,
+                  ar: 'الموعد: ' + localizedValue,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Materials: (\d+)$/,
+              render: function (_, count) {
+                return {
+                  zh: '资料：' + count,
+                  de: 'Materialien: ' + count,
+                  fr: 'Supports : ' + count,
+                  hi: 'सामग्री: ' + count,
+                  ar: 'المواد: ' + count,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Quizzes: (\d+)$/,
+              render: function (_, count) {
+                return {
+                  zh: '测验：' + count,
+                  de: 'Quizze: ' + count,
+                  fr: 'Quiz : ' + count,
+                  hi: 'क्विज़: ' + count,
+                  ar: 'الاختبارات القصيرة: ' + count,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Due: (.+)$/,
+              render: function (_, value) {
+                const localizedValue = localizeFragment(value, locale);
+                return {
+                  zh: '截止：' + localizedValue,
+                  de: 'Fällig: ' + localizedValue,
+                  fr: 'Échéance : ' + localizedValue,
+                  hi: 'अंतिम तिथि: ' + localizedValue,
+                  ar: 'الاستحقاق: ' + localizedValue,
                 }[locale];
               },
             },
@@ -3567,16 +4310,21 @@ function renderPage({
                   zh: '发给 ' + name,
                   de: 'An ' + name,
                   fr: 'À ' + name,
+                  hi: name + ' को',
+                  ar: 'إلى ' + name,
                 }[locale];
               },
             },
             {
               regex: /^Submitted (.+)$/,
               render: function (_, time) {
+                const localizedTime = localizeFragment(time, locale);
                 return {
-                  zh: '已提交 ' + time,
-                  de: 'Abgegeben ' + time,
-                  fr: 'Remis ' + time,
+                  zh: '已提交 ' + localizedTime,
+                  de: 'Abgegeben ' + localizedTime,
+                  fr: 'Remis ' + localizedTime,
+                  hi: localizedTime + ' को जमा किया गया',
+                  ar: 'تم التسليم ' + localizedTime,
                 }[locale];
               },
             },
@@ -3587,6 +4335,8 @@ function renderPage({
                   zh: '成绩：' + grade,
                   de: 'Note: ' + grade,
                   fr: 'Note : ' + grade,
+                  hi: 'ग्रेड: ' + grade,
+                  ar: 'الدرجة: ' + grade,
                 }[locale];
               },
             },
@@ -3597,6 +4347,35 @@ function renderPage({
                   zh: '主讲教师：' + teacher,
                   de: 'Lehrverantwortlich: ' + teacher,
                   fr: 'Enseignant principal : ' + teacher,
+                  hi: 'मुख्य शिक्षक: ' + teacher,
+                  ar: 'المعلم الرئيسي: ' + teacher,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Latest score: (.+) · (.+)$/,
+              render: function (_, score, time) {
+                const localizedScore = localizeFragment(score, locale);
+                const localizedTime = localizeFragment(time, locale);
+                return {
+                  zh: '最近得分：' + localizedScore + ' · ' + localizedTime,
+                  de: 'Letztes Ergebnis: ' + localizedScore + ' · ' + localizedTime,
+                  fr: 'Dernier score : ' + localizedScore + ' · ' + localizedTime,
+                  hi: 'नवीनतम स्कोर: ' + localizedScore + ' · ' + localizedTime,
+                  ar: 'أحدث نتيجة: ' + localizedScore + ' · ' + localizedTime,
+                }[locale];
+              },
+            },
+            {
+              regex: /^Latest result: (.+)$/,
+              render: function (_, value) {
+                const localizedValue = localizeFragment(value, locale);
+                return {
+                  zh: '最近结果：' + localizedValue,
+                  de: 'Letztes Resultat: ' + localizedValue,
+                  fr: 'Dernier résultat : ' + localizedValue,
+                  hi: 'नवीनतम परिणाम: ' + localizedValue,
+                  ar: 'أحدث نتيجة: ' + localizedValue,
                 }[locale];
               },
             },
@@ -3607,6 +4386,8 @@ function renderPage({
                   zh: submitted + ' / ' + total + ' 名学生已提交',
                   de: submitted + ' von ' + total + ' Studierenden haben abgegeben',
                   fr: submitted + ' sur ' + total + ' étudiants ont remis',
+                  hi: total + ' में से ' + submitted + ' छात्रों ने जमा किया',
+                  ar: 'قام ' + submitted + ' من أصل ' + total + ' طلاب بالتسليم',
                 }[locale];
               },
             },
@@ -3617,6 +4398,8 @@ function renderPage({
                   zh: files + ' 个文件 · ' + announcements + ' 条公告 · ' + quizzes + ' 个测验 · ' + assignments + ' 个作业',
                   de: files + ' Dateien · ' + announcements + ' Ankündigungen · ' + quizzes + ' Quizze · ' + assignments + ' Abgaben',
                   fr: files + ' fichiers · ' + announcements + ' annonces · ' + quizzes + ' quiz · ' + assignments + ' travaux',
+                  hi: files + ' फ़ाइलें · ' + announcements + ' घोषणाएँ · ' + quizzes + ' क्विज़ · ' + assignments + ' असाइनमेंट',
+                  ar: files + ' ملفات · ' + announcements + ' إعلانات · ' + quizzes + ' اختبارات قصيرة · ' + assignments + ' واجبات',
                 }[locale];
               },
             },
@@ -3635,11 +4418,15 @@ function renderPage({
           if (!source || locale === 'en') {
             return source;
           }
-          const exact = textTranslations[locale] && textTranslations[locale][source];
+          const exact = translateExact(source, locale);
           if (exact) {
             return exact;
           }
-          return translatePattern(source, locale);
+          const translatedPattern = translatePattern(source, locale);
+          if (translatedPattern !== source) {
+            return translatedPattern;
+          }
+          return translateEmbeddedDates(source, locale);
         }
 
         function attributeDatasetKey(attributeName) {
@@ -3698,6 +4485,7 @@ function renderPage({
           }
           document.title = translateText(window.__uiDocumentTitleOriginal, locale);
           document.documentElement.lang = locale;
+          document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
           document.documentElement.setAttribute('data-ui-locale', locale);
 
           localeButtons.forEach(function (button) {
