@@ -1,0 +1,22 @@
+{
+  "name": "elearn-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "University e-learning platform for AWS EC2, RDS, and S3.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.901.0",
+    "@aws-sdk/s3-request-presigner": "^3.901.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "multer": "^2.0.0",
+    "mysql2": "^3.14.1"
+  }
+}
