@@ -1,42 +1,52 @@
 # University Learning Hub Docs
 
-This folder contains the main project documents for teammates.
+This folder is the main handover entry for teammates.
 
-## Website
+If someone in the group needs to understand the project quickly, this is the best place to start. The documents here are organized by purpose: using the website, writing the report, preparing the presentation, and collecting screenshots.
+
+## Quick Access
 
 - Public website: [http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/](http://ec2-3-123-16-253.eu-central-1.compute.amazonaws.com:3000/)
+- GitHub repository: [https://github.com/Shuyu-G/cloud-computing-university-learning-hub](https://github.com/Shuyu-G/cloud-computing-university-learning-hub)
 
-## GitHub Repository
+## Start Here
 
-- Source code: [https://github.com/Shuyu-G/cloud-computing-university-learning-hub](https://github.com/Shuyu-G/cloud-computing-university-learning-hub)
+1. [HANDOVER_MESSAGE.md](./HANDOVER_MESSAGE.md)
+   Ready-to-send message for teammates with links, what is finished, and what each file is for.
+2. [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md)
+   Best first reading file. Explains what the platform does, how to log in, and how each role uses the system.
+3. [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md)
+   Practical screenshot list for both the report writer and the presentation owner.
 
-## Recommended reading order
+## Main Project Documents
 
-1. [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md)
-   What the website does, how to log in, and how each role should use it.
-2. [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md)
-   A practical screenshot list for the report writer and presentation owner.
-3. [REPORT_DRAFT.md](./REPORT_DRAFT.md)
-   Main report draft with architecture, AWS services, workflows, and screenshot suggestions.
-4. [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md)
-   A 15-minute presentation script with slide order and speaking notes.
-5. [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
+4. [REPORT_DRAFT.md](./REPORT_DRAFT.md)
+   Detailed report draft with architecture, AWS usage, workflows, and screenshot suggestions.
+5. [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md)
+   A 15-minute presentation script with slide order, speaking points, and demo advice.
+6. [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
    Short project overview and local run summary.
-6. [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+7. [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
    AWS deployment guide and infrastructure setup notes.
-7. [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md)
+8. [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md)
    Internal long-form build record.
 
-## Suggested teammate split
+## Recommended Division of Work
 
 - Report writer:
-  Focus on [REPORT_DRAFT.md](./REPORT_DRAFT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md), [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md), and [PROJECT_EXECUTION_LOG.md](./PROJECT_EXECUTION_LOG.md) as support.
+  Start with [REPORT_DRAFT.md](./REPORT_DRAFT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md) and [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
 - Presentation owner:
-  Start with [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md) and [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md) to understand the live product flow.
+  Start with [PRESENTATION_SCRIPT.md](./PRESENTATION_SCRIPT.md), then use [SCREENSHOT_CHECKLIST.md](./SCREENSHOT_CHECKLIST.md) and [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md).
+- Any teammate who just wants to understand the website:
+  Read [TEAMMATE_GUIDE.md](./TEAMMATE_GUIDE.md) first.
 
-## Main AWS story to remember
+## Core AWS Story
+
+The most important summary of the whole project is:
 
 - `EC2` runs the Node.js application
-- `RDS` stores structured teaching data
+- `RDS` stores structured teaching and platform data
 - `S3` stores course files, assignment submissions, and chat attachments
-- `VPC`, `Security Groups`, and `IAM` make the system secure and deployable
+- `VPC`, `Security Groups`, and `IAM` support the deployment and access control
+
+If teammates remember that summary, they understand the main cloud-computing value of the project.
