@@ -2478,6 +2478,83 @@ function renderRolePill(role) {
   return `<span class="role-pill ${escapeHtml(role)}">${escapeHtml(roleLabel(role))}</span>`;
 }
 
+function renderHeroHighlights(items = []) {
+  const visibleItems = items.filter(Boolean);
+  if (!visibleItems.length) {
+    return "";
+  }
+
+  return `<div class="hero-highlights">
+    ${visibleItems
+      .map((item) => `<span class="hero-highlight">${escapeHtml(item)}</span>`)
+      .join("")}
+  </div>`;
+}
+
+function renderHeroVisual(theme = "atlas", cards = []) {
+  const fallbackCards = [
+    { label: "EC2", value: "App", detail: "Live" },
+    { label: "RDS", value: "Data", detail: "Core" },
+    { label: "S3", value: "Files", detail: "Cloud" },
+  ];
+  const visualCards = (cards.length ? cards : fallbackCards).slice(0, 3);
+
+  return `<div class="hero-visual hero-visual-${escapeHtml(theme)}" aria-hidden="true">
+    <div class="hero-visual-backdrop"></div>
+    <svg viewBox="0 0 520 420" role="presentation">
+      <defs>
+        <linearGradient id="hero-line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(15, 118, 110, 0.95)" />
+          <stop offset="55%" stop-color="rgba(21, 94, 117, 0.9)" />
+          <stop offset="100%" stop-color="rgba(200, 122, 43, 0.88)" />
+        </linearGradient>
+        <linearGradient id="hero-soft-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.92)" />
+          <stop offset="100%" stop-color="rgba(240,247,255,0.62)" />
+        </linearGradient>
+      </defs>
+      <g opacity="0.95">
+        <path
+          d="M72 308 C122 228, 210 166, 292 152 C362 140, 420 92, 448 62"
+          fill="none"
+          stroke="url(#hero-line-gradient)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          d="M86 344 C172 304, 224 252, 300 242 C372 232, 414 184, 454 132"
+          fill="none"
+          stroke="rgba(16, 32, 51, 0.16)"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-dasharray="7 10"
+        />
+        <circle cx="72" cy="308" r="18" fill="url(#hero-soft-fill)" stroke="rgba(15, 118, 110, 0.32)" stroke-width="2" />
+        <circle cx="292" cy="152" r="24" fill="url(#hero-soft-fill)" stroke="rgba(15, 118, 110, 0.22)" stroke-width="2" />
+        <circle cx="448" cy="62" r="16" fill="url(#hero-soft-fill)" stroke="rgba(200, 122, 43, 0.34)" stroke-width="2" />
+        <rect x="146" y="224" width="118" height="78" rx="22" fill="rgba(255,255,255,0.62)" stroke="rgba(16, 32, 51, 0.08)" />
+        <rect x="268" y="82" width="146" height="92" rx="26" fill="rgba(255,255,255,0.74)" stroke="rgba(16, 32, 51, 0.08)" />
+        <rect x="82" y="104" width="120" height="72" rx="24" fill="rgba(248, 241, 232, 0.78)" stroke="rgba(200, 122, 43, 0.12)" />
+        <rect x="118" y="124" width="48" height="8" rx="4" fill="rgba(16, 32, 51, 0.18)" />
+        <rect x="118" y="142" width="66" height="8" rx="4" fill="rgba(16, 32, 51, 0.1)" />
+        <rect x="294" y="106" width="86" height="10" rx="5" fill="rgba(16, 32, 51, 0.18)" />
+        <rect x="294" y="128" width="104" height="10" rx="5" fill="rgba(16, 32, 51, 0.11)" />
+        <rect x="164" y="246" width="72" height="10" rx="5" fill="rgba(16, 32, 51, 0.18)" />
+        <rect x="164" y="268" width="52" height="10" rx="5" fill="rgba(16, 32, 51, 0.11)" />
+      </g>
+    </svg>
+    ${visualCards
+      .map(
+        (card, index) => `<div class="hero-visual-card hero-visual-card-${index + 1}">
+          <p>${escapeHtml(card.label)}</p>
+          <strong>${escapeHtml(card.value)}</strong>
+          <span>${escapeHtml(card.detail)}</span>
+        </div>`
+      )
+      .join("")}
+  </div>`;
+}
+
 function renderStatsCards(cards) {
   return `<section class="grid stats-grid">
     ${cards
@@ -3472,6 +3549,9 @@ function renderPage({
   query = {},
   extraScripts = "",
   headlineNoWrap = false,
+  heroHighlights = [],
+  heroVisual = "",
+  pageClass = "",
 }) {
   const authActions = user
     ? `<nav class="nav-actions">
@@ -3492,6 +3572,8 @@ function renderPage({
         <span>${escapeHtml(user.full_name)}</span>
       </div>`
     : "";
+  const heroVisualMarkup =
+    heroVisual || renderHeroVisual(user ? user.role : "public");
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -3502,9 +3584,12 @@ function renderPage({
     <style>
       :root {
         color-scheme: light;
+        --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        --font-sans: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
         --bg-1: #edf3ff;
         --bg-2: #f7fbff;
         --bg-3: #f5efe5;
+        --bg-4: #dce8f6;
         --surface: rgba(255, 255, 255, 0.84);
         --surface-strong: rgba(255, 255, 255, 0.96);
         --surface-quiet: rgba(247, 250, 255, 0.82);
@@ -3526,6 +3611,7 @@ function renderPage({
         --radius-xl: 30px;
         --radius-lg: 24px;
         --radius-md: 18px;
+        --radius-sm: 14px;
       }
 
       html {
@@ -3538,7 +3624,7 @@ function renderPage({
 
       body {
         margin: 0;
-        font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+        font-family: var(--font-sans);
         color: var(--text);
         background:
           radial-gradient(circle at 12% 16%, rgba(15, 118, 110, 0.16), transparent 0 24%),
@@ -3662,6 +3748,11 @@ function renderPage({
         padding: 20px 0 64px;
         position: relative;
         z-index: 1;
+      }
+
+      .page-body {
+        display: grid;
+        gap: 24px;
       }
 
       .topbar {
@@ -3811,12 +3902,33 @@ function renderPage({
         pointer-events: none;
       }
 
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: 28px;
+        align-items: stretch;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .hero-copy p {
+        margin: 0;
+      }
+
       .hero h2 {
         margin: 12px 0 14px;
         font-size: clamp(2.3rem, 4.6vw, 4.4rem);
         line-height: 0.98;
         max-width: 14ch;
         letter-spacing: -0.05em;
+        font-family: var(--font-display);
+        font-weight: 700;
       }
 
       .hero h2.nowrap {
@@ -3832,6 +3944,131 @@ function renderPage({
         color: var(--muted);
         max-width: 68ch;
         font-size: 1rem;
+      }
+
+      .hero-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-highlight {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(20, 53, 91, 0.08);
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--primary-dark);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        box-shadow: 0 10px 24px rgba(20, 45, 89, 0.06);
+      }
+
+      .hero-visual-shell {
+        min-height: 330px;
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 100%;
+        border-radius: 28px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.18)),
+          linear-gradient(140deg, rgba(15,118,110,0.14), rgba(255,255,255,0) 52%, rgba(200,122,43,0.16));
+        border: 1px solid rgba(255, 255, 255, 0.84);
+        box-shadow: 0 26px 48px rgba(19, 43, 83, 0.12);
+        backdrop-filter: blur(20px);
+      }
+
+      .hero-visual-public {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.22)),
+          linear-gradient(135deg, rgba(15,118,110,0.16), rgba(255,255,255,0) 54%, rgba(200,122,43,0.18));
+      }
+
+      .hero-visual-admin {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.22)),
+          linear-gradient(135deg, rgba(22,91,114,0.18), rgba(255,255,255,0) 48%, rgba(15,118,110,0.14));
+      }
+
+      .hero-visual-teacher {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.22)),
+          linear-gradient(135deg, rgba(200,122,43,0.16), rgba(255,255,255,0) 52%, rgba(15,118,110,0.14));
+      }
+
+      .hero-visual-student,
+      .hero-visual-course {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.22)),
+          linear-gradient(135deg, rgba(15,118,110,0.14), rgba(255,255,255,0) 48%, rgba(56,189,248,0.16));
+      }
+
+      .hero-visual-backdrop {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 16% 22%, rgba(15,118,110,0.14), transparent 22%),
+          radial-gradient(circle at 82% 18%, rgba(200,122,43,0.16), transparent 28%),
+          linear-gradient(transparent 0 calc(100% - 1px), rgba(20,53,91,0.05) calc(100% - 1px)),
+          linear-gradient(90deg, transparent 0 calc(100% - 1px), rgba(20,53,91,0.035) calc(100% - 1px));
+        background-size: auto, auto, 100% 44px, 44px 100%;
+      }
+
+      .hero-visual svg {
+        position: absolute;
+        inset: 16px;
+        width: calc(100% - 32px);
+        height: calc(100% - 32px);
+      }
+
+      .hero-visual-card {
+        position: absolute;
+        display: grid;
+        gap: 4px;
+        min-width: 140px;
+        padding: 14px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.82);
+        box-shadow: 0 18px 34px rgba(20, 45, 89, 0.1);
+      }
+
+      .hero-visual-card p,
+      .hero-visual-card span {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .hero-visual-card strong {
+        margin: 0;
+        color: var(--text);
+        font-size: 1.25rem;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        font-family: var(--font-display);
+      }
+
+      .hero-visual-card-1 {
+        top: 18px;
+        right: 18px;
+      }
+
+      .hero-visual-card-2 {
+        left: 22px;
+        bottom: 28px;
+      }
+
+      .hero-visual-card-3 {
+        right: 32px;
+        bottom: 88px;
       }
 
       .hero-meta {
@@ -3899,7 +4136,7 @@ function renderPage({
       }
 
       .cards-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(12, minmax(0, 1fr));
       }
 
       .two-col {
@@ -3989,6 +4226,8 @@ function renderPage({
       .panel h4 {
         margin: 0 0 10px;
         letter-spacing: -0.02em;
+        font-family: var(--font-display);
+        font-weight: 700;
       }
 
       .kicker {
@@ -4145,6 +4384,92 @@ function renderPage({
         flex-wrap: wrap;
         align-items: center;
         margin-top: 10px;
+      }
+
+      .landing-grid {
+        display: grid;
+        grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .dashboard-intro-grid,
+      .course-overview-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+        margin-bottom: 24px;
+      }
+
+      .spotlight-panel {
+        min-height: 100%;
+      }
+
+      .spotlight-panel.spotlight-primary {
+        background:
+          linear-gradient(160deg, rgba(255,255,255,0.94), rgba(235,247,245,0.78) 54%, rgba(247,250,255,0.88)),
+          var(--surface);
+      }
+
+      .spotlight-panel.spotlight-secondary {
+        background:
+          linear-gradient(160deg, rgba(255,255,255,0.94), rgba(248,241,232,0.76) 58%, rgba(247,250,255,0.88)),
+          var(--surface);
+      }
+
+      .spotlight-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .spotlight-head h3 {
+        margin-bottom: 8px;
+      }
+
+      .spotlight-list,
+      .spotlight-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .spotlight-list .catalog-entry,
+      .spotlight-stack .catalog-entry {
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .role-cluster {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .signal-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .signal-stat {
+        display: grid;
+        gap: 4px;
+        min-width: 132px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(20, 53, 91, 0.08);
+        background: rgba(255, 255, 255, 0.74);
+      }
+
+      .signal-stat strong {
+        font-size: 1.15rem;
+        line-height: 1.05;
+        font-family: var(--font-display);
+      }
+
+      .signal-stat span,
+      .signal-stat small {
+        color: var(--muted);
       }
 
       .table-wrap {
@@ -4316,6 +4641,18 @@ function renderPage({
 
       .page-panel-stack:not([hidden]) {
         display: grid;
+      }
+
+      .page-body > *:nth-child(2) {
+        animation-delay: 50ms;
+      }
+
+      .page-body > *:nth-child(3) {
+        animation-delay: 100ms;
+      }
+
+      .page-body > *:nth-child(4) {
+        animation-delay: 150ms;
       }
 
       .cards-scroll {
@@ -4508,20 +4845,55 @@ function renderPage({
       }
 
       .auth-panel {
-        max-width: 520px;
-        margin: 0 auto;
+        max-width: none;
+        margin: 0;
+        min-height: 100%;
+      }
+
+      .auth-panel .button {
+        justify-self: start;
+      }
+
+      .editorial-side-panel {
+        min-height: 100%;
+      }
+
+      .editorial-side-panel h3 {
+        margin-bottom: 14px;
+      }
+
+      .editorial-matrix {
+        display: grid;
+        gap: 12px;
+      }
+
+      .editorial-matrix .catalog-entry {
+        min-height: 100%;
+      }
+
+      .editorial-matrix.two-up {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .auth-panel h3 {
-        font-size: 1.7rem;
-        letter-spacing: -0.04em;
-        margin-bottom: 6px;
+        font-size: clamp(1.8rem, 3vw, 2.3rem);
+        letter-spacing: -0.05em;
+        margin-bottom: 8px;
       }
 
       .course-card {
         display: flex;
         flex-direction: column;
         min-height: 100%;
+        grid-column: span 4;
+      }
+
+      .course-card:nth-child(5n + 1) {
+        grid-column: span 8;
+      }
+
+      .course-card:nth-child(7n + 3) {
+        grid-column: span 6;
       }
 
       .course-card::after {
@@ -4550,10 +4922,13 @@ function renderPage({
 
       .course-card-top h3 {
         margin-bottom: 6px;
+        font-size: clamp(1.45rem, 2vw, 1.9rem);
       }
 
       .course-description {
-        margin: 8px 0 0;
+        margin: 10px 0 0;
+        font-size: 1rem;
+        max-width: 56ch;
       }
 
       .course-meta-list {
@@ -4581,6 +4956,44 @@ function renderPage({
         display: flex;
         align-items: center;
         justify-content: flex-start;
+      }
+
+      .overview-identity {
+        min-height: 100%;
+      }
+
+      .overview-description {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        max-width: 60ch;
+        margin: 0;
+      }
+
+      .overview-side-stack {
+        display: grid;
+        gap: 20px;
+      }
+
+      .overview-side-stack .panel {
+        min-height: 0;
+      }
+
+      .overview-service-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .overview-service {
+        padding: 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(20, 53, 91, 0.08);
+        background: rgba(255, 255, 255, 0.74);
+      }
+
+      .overview-service strong {
+        display: block;
+        margin-bottom: 6px;
       }
 
       .mono {
@@ -4619,12 +5032,35 @@ function renderPage({
           max-width: none;
         }
 
+        .hero-grid,
+        .landing-grid,
+        .dashboard-intro-grid,
+        .course-overview-grid {
+          grid-template-columns: 1fr;
+        }
+
         .page-menu {
           top: 74px;
           padding: 10px;
         }
 
         .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .course-card,
+        .course-card:nth-child(5n + 1),
+        .course-card:nth-child(7n + 3) {
+          grid-column: auto;
+        }
+
+        .role-cluster,
+        .editorial-matrix.two-up,
+        .overview-service-grid {
           grid-template-columns: 1fr;
         }
       }
@@ -4673,7 +5109,7 @@ function renderPage({
       }
     </style>
   </head>
-  <body>
+  <body class="${escapeHtml(pageClass)}">
     <main class="app-shell">
       <header class="topbar">
         <div class="brand">
@@ -4684,13 +5120,25 @@ function renderPage({
       </header>
 
       <section class="hero">
-        ${roleBlock}
-        <h2 class="${headlineNoWrap ? "nowrap" : ""}">${escapeHtml(headline)}</h2>
-        ${subhead ? `<p>${escapeHtml(subhead)}</p>` : ""}
+        <div class="hero-grid">
+          <div class="hero-copy">
+            ${roleBlock}
+            ${renderHeroHighlights(heroHighlights)}
+            <div>
+              <h2 class="${headlineNoWrap ? "nowrap" : ""}">${escapeHtml(headline)}</h2>
+              ${subhead ? `<p>${escapeHtml(subhead)}</p>` : ""}
+            </div>
+          </div>
+          <div class="hero-visual-shell">
+            ${heroVisualMarkup}
+          </div>
+        </div>
       </section>
 
-      ${renderMessageBanner(query)}
-      ${content}
+      <div class="page-body">
+        ${renderMessageBanner(query)}
+        ${content}
+      </div>
     </main>
     ${extraScripts}
     <script>
@@ -6103,19 +6551,67 @@ app.get(
     }
 
     const content = `
-      <section class="panel auth-panel">
-        <h3>Login</h3>
-        <form method="post" action="/login">
-          <label>
-            Email
-            <input type="email" name="email" placeholder="admin@example.com" required />
-          </label>
-          <label>
-            Password
-            <input type="password" name="password" placeholder="Enter your password" required />
-          </label>
-          <button type="submit">Sign in</button>
-        </form>
+      <section class="landing-grid">
+        <section class="panel auth-panel">
+          <p class="kicker">Login</p>
+          <h3>Login</h3>
+          <form method="post" action="/login">
+            <label>
+              Email
+              <input type="email" name="email" placeholder="admin@example.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" placeholder="Enter your password" required />
+            </label>
+            <button type="submit">Sign in</button>
+          </form>
+        </section>
+
+        <section class="stack">
+          <article class="panel editorial-side-panel">
+            <p class="kicker">EC2 · RDS · S3</p>
+            <h3>Assignments, messages, grades, and course files in one cloud-backed space</h3>
+            <div class="signal-strip">
+              <div class="signal-stat">
+                <span>EC2</span>
+                <strong>Application</strong>
+                <small>Live platform</small>
+              </div>
+              <div class="signal-stat">
+                <span>RDS</span>
+                <strong>Database</strong>
+                <small>Users · Courses · Messages</small>
+              </div>
+              <div class="signal-stat">
+                <span>S3</span>
+                <strong>Storage</strong>
+                <small>Files · Attachments · Submissions</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel editorial-side-panel">
+            <div class="editorial-matrix two-up">
+              <div class="catalog-entry">
+                <strong>Admin</strong>
+                <p>People · Curriculum · Oversight</p>
+              </div>
+              <div class="catalog-entry">
+                <strong>Teacher</strong>
+                <p>Courses · Assignments · Messages</p>
+              </div>
+              <div class="catalog-entry">
+                <strong>Student</strong>
+                <p>Content · Assignments · Grade</p>
+              </div>
+              <div class="catalog-entry">
+                <strong>AWS</strong>
+                <p>Documents in S3 and structured data in RDS</p>
+              </div>
+            </div>
+          </article>
+        </section>
       </section>`;
 
     res.send(
@@ -6126,6 +6622,13 @@ app.get(
         content,
         query: req.query,
         headlineNoWrap: true,
+        heroHighlights: ["EC2", "RDS", "S3", "Assignments", "Messages", "Grades"],
+        heroVisual: renderHeroVisual("public", [
+          { label: "EC2", value: "App", detail: "Live website" },
+          { label: "RDS", value: "Data", detail: "Users and grades" },
+          { label: "S3", value: "Files", detail: "Course materials" },
+        ]),
+        pageClass: "page-public",
       })
     );
   })
@@ -6226,8 +6729,62 @@ app.get(
           valueAttributes: 'data-live-online-count',
         },
       ];
+      const featuredCourses = courses.slice(0, 4);
 
       const content = `
+        <section class="dashboard-intro-grid">
+          <article class="panel spotlight-panel spotlight-primary">
+            <div class="spotlight-head">
+              <div>
+                <p class="kicker">People</p>
+                <h3>Directory credentials</h3>
+              </div>
+              <span class="inline-chip">${(countsMap.get("teacher") || 0) + (countsMap.get("student") || 0)} accounts</span>
+            </div>
+            <p class="section-meta">${escapeHtml(stats[3].detail)}</p>
+            <div class="signal-strip">
+              <div class="signal-stat">
+                <span>Teachers</span>
+                <strong>${countsMap.get("teacher") || 0}</strong>
+                <small>${escapeHtml(stats[0].detail)}</small>
+              </div>
+              <div class="signal-stat">
+                <span>Students</span>
+                <strong>${countsMap.get("student") || 0}</strong>
+                <small>${escapeHtml(stats[1].detail)}</small>
+              </div>
+              <div class="signal-stat">
+                <span>Online now</span>
+                <strong>${onlineUsers.filter(isOnline).length}</strong>
+                <small>${escapeHtml(stats[3].detail)}</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel spotlight-panel spotlight-secondary">
+            <div class="spotlight-head">
+              <div>
+                <p class="kicker">Curriculum</p>
+                <h3>All live courses</h3>
+              </div>
+              <span class="inline-chip">${courses.length} courses</span>
+            </div>
+            ${
+              featuredCourses.length
+                ? `<div class="spotlight-list">
+                    ${featuredCourses
+                      .map(
+                        (course) => `<a class="catalog-entry" href="/courses/${course.id}">
+                          <strong>${escapeHtml(course.code)}</strong>
+                          <p>${escapeHtml(course.title)}</p>
+                        </a>`
+                      )
+                      .join("")}
+                  </div>`
+                : `<p class="empty">No courses created yet.</p>`
+            }
+          </article>
+        </section>
         ${renderStatsCards(stats)}
         ${renderPageMenu("dashboard-tabs", "people", [
           { id: "people", label: "People" },
@@ -6476,6 +7033,18 @@ app.get(
           content,
           query: req.query,
           extraScripts: renderDashboardScripts(),
+          heroHighlights: [
+            `Teachers ${countsMap.get("teacher") || 0}`,
+            `Students ${countsMap.get("student") || 0}`,
+            `Courses ${courses.length}`,
+            `Online ${onlineUsers.filter(isOnline).length}`,
+          ],
+          heroVisual: renderHeroVisual("admin", [
+            { label: "People", value: String((countsMap.get("teacher") || 0) + (countsMap.get("student") || 0)), detail: "Accounts" },
+            { label: "Courses", value: String(courses.length), detail: "Live spaces" },
+            { label: "Oversight", value: String(recentLogs.length), detail: "Recent actions" },
+          ]),
+          pageClass: "page-admin",
         })
       );
       return;
@@ -6502,8 +7071,59 @@ app.get(
             : "Create your first course to set a schedule",
         },
       ];
+      const spotlightCourses = courses.slice(0, 4);
+      const spotlightAnnouncements = announcements.slice(0, 3);
 
       const content = `
+        <section class="dashboard-intro-grid">
+          <article class="panel spotlight-panel spotlight-primary">
+            <div class="spotlight-head">
+              <div>
+                <p class="kicker">Courses</p>
+                <h3>Your classroom spaces</h3>
+              </div>
+              <span class="inline-chip">${courses.length} courses</span>
+            </div>
+            ${
+              spotlightCourses.length
+                ? `<div class="spotlight-list">
+                    ${spotlightCourses
+                      .map(
+                        (course) => `<a class="catalog-entry" href="/courses/${course.id}">
+                          <strong>${escapeHtml(course.code)}</strong>
+                          <p>${escapeHtml(course.title)}</p>
+                        </a>`
+                      )
+                      .join("")}
+                  </div>`
+                : `<p class="empty">You do not manage any courses yet.</p>`
+            }
+          </article>
+
+          <article class="panel spotlight-panel spotlight-secondary">
+            <div class="spotlight-head">
+              <div>
+                <p class="kicker">Announcements</p>
+                <h3>Recent teacher updates</h3>
+              </div>
+              <span class="inline-chip">${announcements.length} announcements</span>
+            </div>
+            ${
+              spotlightAnnouncements.length
+                ? `<div class="spotlight-stack">
+                    ${spotlightAnnouncements
+                      .map(
+                        (announcement) => `<div class="catalog-entry">
+                          <strong>${escapeHtml(announcement.title)}</strong>
+                          <p>${escapeHtml(announcement.course_title || announcement.author_name)}</p>
+                        </div>`
+                      )
+                      .join("")}
+                  </div>`
+                : `<p class="empty">Once you start posting announcements inside courses, the latest items will surface here.</p>`
+            }
+          </article>
+        </section>
         ${renderStatsCards(stats)}
         ${renderPageMenu("dashboard-tabs", "courses", [
           { id: "create", label: "Create" },
@@ -6593,6 +7213,17 @@ app.get(
           content,
           query: req.query,
           extraScripts: renderDashboardScripts(),
+          heroHighlights: [
+            `Courses ${courses.length}`,
+            `Announcements ${announcements.length}`,
+            `Next ${courses[0] ? courses[0].code : "None"}`,
+          ],
+          heroVisual: renderHeroVisual("teacher", [
+            { label: "Courses", value: String(courses.length), detail: "Managed" },
+            { label: "Updates", value: String(announcements.length), detail: "Recent posts" },
+            { label: "Audit", value: String(recentLogs.length), detail: "Tracked actions" },
+          ]),
+          pageClass: "page-teacher",
         })
       );
       return;
@@ -6633,6 +7264,57 @@ app.get(
       : [];
 
     const content = `
+      <section class="dashboard-intro-grid">
+        <article class="panel spotlight-panel spotlight-primary">
+          <div class="spotlight-head">
+            <div>
+              <p class="kicker">My courses</p>
+              <h3>Study spaces</h3>
+            </div>
+            <span class="inline-chip">${courses.length} courses</span>
+          </div>
+          ${
+            courses.length
+              ? `<div class="spotlight-list">
+                  ${courses
+                    .slice(0, 4)
+                    .map(
+                      (course) => `<a class="catalog-entry" href="/courses/${course.id}">
+                        <strong>${escapeHtml(course.code)}</strong>
+                        <p>${escapeHtml(course.title)}</p>
+                      </a>`
+                    )
+                    .join("")}
+                </div>`
+              : `<p class="empty">You are not enrolled in any courses yet.</p>`
+          }
+        </article>
+
+        <article class="panel spotlight-panel spotlight-secondary">
+          <div class="spotlight-head">
+            <div>
+              <p class="kicker">Grades</p>
+              <h3>Recorded marks</h3>
+            </div>
+            <span class="inline-chip">${grades.length} grades</span>
+          </div>
+          ${
+            grades.length
+              ? `<div class="spotlight-stack">
+                  ${grades
+                    .slice(0, 3)
+                    .map(
+                      (grade) => `<div class="catalog-entry">
+                        <strong>${escapeHtml(`${grade.course_code} · ${grade.grade_value}`)}</strong>
+                        <p>${escapeHtml(grade.feedback || "No feedback yet.")}</p>
+                      </div>`
+                    )
+                    .join("")}
+                </div>`
+              : `<p class="empty">No grades have been posted yet.</p>`
+          }
+        </article>
+      </section>
       ${renderStatsCards([
         {
           label: "Enrolled courses",
@@ -6739,6 +7421,17 @@ app.get(
         content,
         query: req.query,
         extraScripts: renderDashboardScripts(),
+        heroHighlights: [
+          `Courses ${courses.length}`,
+          `Announcements ${announcements.length}`,
+          `Grades ${grades.length}`,
+        ],
+        heroVisual: renderHeroVisual("student", [
+          { label: "Courses", value: String(courses.length), detail: "Enrolled" },
+          { label: "Updates", value: String(announcements.length), detail: "Notices" },
+          { label: "Grades", value: String(grades.length), detail: "Recorded" },
+        ]),
+        pageClass: "page-student",
       })
     );
   })
@@ -7706,27 +8399,60 @@ app.get(
       </section>`;
 
     const overviewPanel = `
-      <section class="grid course-hero-grid">
-        <article class="panel compact-panel">
-          <p class="kicker">Code</p>
-          <h3>${escapeHtml(course.code)}</h3>
+      <section class="course-overview-grid">
+        <article class="panel overview-identity">
+          <p class="kicker">${escapeHtml(course.code)}</p>
+          <h3>${escapeHtml(course.title)}</h3>
           <p class="helper">${escapeHtml(
             [course.study_level ? studyLevelLabel(course.study_level) : "", course.program_name]
               .filter(Boolean)
               .join(" · ")
           )}</p>
-          <p>${escapeHtml(course.description)}</p>
+          <p class="overview-description">${escapeHtml(course.description)}</p>
+          <div class="meta-list course-meta-list">
+            ${course.study_level ? `<span class="meta-chip">Level: ${escapeHtml(studyLevelLabel(course.study_level))}</span>` : ""}
+            ${course.program_name ? `<span class="meta-chip">Program: ${escapeHtml(course.program_name)}</span>` : ""}
+            <span class="meta-chip">Teachers: ${escapeHtml(teacherNames.join(", "))}</span>
+            <span class="meta-chip">Students: ${students.length}</span>
+          </div>
         </article>
-        <article class="panel compact-panel">
-          <p class="kicker">Schedule</p>
-          <h3>${escapeHtml(formatDateTime(course.schedule_at))}</h3>
-          <p>Lead teacher: ${escapeHtml(teacherNames.join(", "))}</p>
-        </article>
-        <article class="panel compact-panel">
-          <p class="kicker">Activity</p>
-          <h3>${students.length} students</h3>
-          <p>${materials.length} files · ${announcements.length} announcements · ${quizzes.length} quizzes · ${assignments.length} assignments</p>
-        </article>
+
+        <div class="overview-side-stack">
+          <article class="panel compact-panel">
+            <p class="kicker">Schedule</p>
+            <h3>${escapeHtml(formatDateTime(course.schedule_at))}</h3>
+            <p>Lead teacher: ${escapeHtml(teacherNames.join(", "))}</p>
+          </article>
+          <article class="panel compact-panel">
+            <p class="kicker">Activity</p>
+            <div class="overview-service-grid">
+              <div class="overview-service">
+                <strong>${students.length}</strong>
+                <span>Students</span>
+              </div>
+              <div class="overview-service">
+                <strong>${materials.length}</strong>
+                <span>Materials</span>
+              </div>
+              <div class="overview-service">
+                <strong>${assignments.length}</strong>
+                <span>Assignments</span>
+              </div>
+              <div class="overview-service">
+                <strong>${announcements.length}</strong>
+                <span>Announcements</span>
+              </div>
+              <div class="overview-service">
+                <strong>${quizzes.length}</strong>
+                <span>Quizzes</span>
+              </div>
+              <div class="overview-service">
+                <strong>${publicMessages.length + directConversationSummaries.length}</strong>
+                <span>Messages</span>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>`;
 
     const courseContentSections = `
@@ -8278,6 +9004,20 @@ app.get(
         content,
         query: req.query,
         extraScripts,
+        heroHighlights: [
+          course.code,
+          course.study_level ? studyLevelLabel(course.study_level) : "",
+          course.program_name || "",
+          `${students.length} students`,
+          `${materials.length} materials`,
+          `${assignments.length} assignments`,
+        ],
+        heroVisual: renderHeroVisual("course", [
+          { label: "Materials", value: String(materials.length), detail: "S3 files" },
+          { label: "Assignments", value: String(assignments.length), detail: "Cloud workflow" },
+          { label: "Messages", value: String(publicMessages.length + directConversationSummaries.length), detail: "Course chat" },
+        ]),
+        pageClass: "page-course",
       })
     );
   })
