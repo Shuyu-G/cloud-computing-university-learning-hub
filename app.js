@@ -2482,10 +2482,15 @@ function renderStatsCards(cards) {
   return `<section class="grid stats-grid">
     ${cards
       .map(
-        (card) => `<article class="panel stat-card">
-          <p class="kicker">${escapeHtml(card.label)}</p>
-          <h3${card.valueAttributes ? ` ${card.valueAttributes}` : ""}>${escapeHtml(card.value)}</h3>
-          <p>${escapeHtml(card.detail)}</p>
+        (card, index) => `<article class="panel stat-card stat-tone-${(index % 4) + 1}">
+          <div class="stat-card-top">
+            <p class="kicker">${escapeHtml(card.label)}</p>
+            <span class="stat-pulse" aria-hidden="true"></span>
+          </div>
+          <div class="stat-value-row">
+            <h3 class="stat-value"${card.valueAttributes ? ` ${card.valueAttributes}` : ""}>${escapeHtml(card.value)}</h3>
+          </div>
+          <p class="stat-detail">${escapeHtml(card.detail)}</p>
         </article>`
       )
       .join("")}
@@ -2500,28 +2505,32 @@ function renderCourseCards(courses, emptyMessage) {
   return `<section class="grid cards-grid">
     ${courses
       .map(
-        (course) => `<article class="panel course-card">
-          <div class="card-header">
+        (course) => `<article class="panel course-card course-card-${escapeHtml(
+          course.study_level || "general"
+        )}">
+          <div class="course-card-top">
             <div>
               <p class="kicker">${escapeHtml(course.code)}</p>
               <h3>${escapeHtml(course.title)}</h3>
             </div>
-            <span class="inline-chip">${course.student_count || 0} students</span>
+            <span class="inline-chip course-count-chip">${course.student_count || 0} students</span>
           </div>
-          <p>${escapeHtml(truncate(course.description, 180))}</p>
-          <div class="meta-list">
+          <p class="course-description">${escapeHtml(truncate(course.description, 180))}</p>
+          <div class="meta-list course-meta-list">
             ${
               course.study_level
-                ? `<span>Level: ${escapeHtml(studyLevelLabel(course.study_level))}</span>`
+                ? `<span class="meta-chip">Level: ${escapeHtml(studyLevelLabel(course.study_level))}</span>`
                 : ""
             }
-            ${course.program_name ? `<span>Program: ${escapeHtml(course.program_name)}</span>` : ""}
-            ${course.creator_name ? `<span>Teacher: ${escapeHtml(course.creator_name)}</span>` : ""}
-            <span>Schedule: ${escapeHtml(formatDateTime(course.schedule_at))}</span>
-            <span>Materials: ${course.material_count || 0}</span>
-            <span>Quizzes: ${course.quiz_count || 0}</span>
+            ${course.program_name ? `<span class="meta-chip">Program: ${escapeHtml(course.program_name)}</span>` : ""}
+            ${course.creator_name ? `<span class="meta-chip">Teacher: ${escapeHtml(course.creator_name)}</span>` : ""}
+            <span class="meta-chip">Schedule: ${escapeHtml(formatDateTime(course.schedule_at))}</span>
+            <span class="meta-chip">Materials: ${course.material_count || 0}</span>
+            <span class="meta-chip">Quizzes: ${course.quiz_count || 0}</span>
           </div>
-          <a class="button secondary" href="/courses/${course.id}">Open course</a>
+          <div class="course-actions">
+            <a class="button secondary" href="/courses/${course.id}">Open course</a>
+          </div>
         </article>`
       )
       .join("")}
@@ -2575,7 +2584,7 @@ function renderFilterableCourseCards(courses, emptyMessage, scopeName) {
         ${courses
           .map(
             (course) => `<article
-              class="panel course-card"
+              class="panel course-card course-card-${escapeHtml(course.study_level || "general")}"
               data-course-card
               data-level="${escapeHtml(course.study_level || "")}"
               data-program="${escapeHtml(course.program_name || "")}"
@@ -2584,27 +2593,29 @@ function renderFilterableCourseCards(courses, emptyMessage, scopeName) {
                   course.creator_name || ""
                 } ${course.study_level || ""}`.toLowerCase()
               )}">
-              <div class="card-header">
+              <div class="course-card-top">
                 <div>
                   <p class="kicker">${escapeHtml(course.code)}</p>
                   <h3>${escapeHtml(course.title)}</h3>
                 </div>
-                <span class="inline-chip">${course.student_count || 0} students</span>
+                <span class="inline-chip course-count-chip">${course.student_count || 0} students</span>
               </div>
-              <p>${escapeHtml(truncate(course.description, 180))}</p>
-              <div class="meta-list">
+              <p class="course-description">${escapeHtml(truncate(course.description, 180))}</p>
+              <div class="meta-list course-meta-list">
                 ${
                   course.study_level
-                    ? `<span>Level: ${escapeHtml(studyLevelLabel(course.study_level))}</span>`
+                    ? `<span class="meta-chip">Level: ${escapeHtml(studyLevelLabel(course.study_level))}</span>`
                     : ""
                 }
-                ${course.program_name ? `<span>Program: ${escapeHtml(course.program_name)}</span>` : ""}
-                ${course.creator_name ? `<span>Teacher: ${escapeHtml(course.creator_name)}</span>` : ""}
-                <span>Schedule: ${escapeHtml(formatDateTime(course.schedule_at))}</span>
-                <span>Materials: ${course.material_count || 0}</span>
-                <span>Quizzes: ${course.quiz_count || 0}</span>
+                ${course.program_name ? `<span class="meta-chip">Program: ${escapeHtml(course.program_name)}</span>` : ""}
+                ${course.creator_name ? `<span class="meta-chip">Teacher: ${escapeHtml(course.creator_name)}</span>` : ""}
+                <span class="meta-chip">Schedule: ${escapeHtml(formatDateTime(course.schedule_at))}</span>
+                <span class="meta-chip">Materials: ${course.material_count || 0}</span>
+                <span class="meta-chip">Quizzes: ${course.quiz_count || 0}</span>
               </div>
-              <a class="button secondary" href="/courses/${course.id}">Open course</a>
+              <div class="course-actions">
+                <a class="button secondary" href="/courses/${course.id}">Open course</a>
+              </div>
             </article>`
           )
           .join("")}
@@ -3491,21 +3502,30 @@ function renderPage({
     <style>
       :root {
         color-scheme: light;
-        --bg-1: #f6efe3;
-        --bg-2: #eef7f2;
+        --bg-1: #edf3ff;
+        --bg-2: #f7fbff;
+        --bg-3: #f5efe5;
         --surface: rgba(255, 255, 255, 0.84);
-        --surface-strong: #ffffff;
-        --text: #1b2630;
-        --muted: #556370;
+        --surface-strong: rgba(255, 255, 255, 0.96);
+        --surface-quiet: rgba(247, 250, 255, 0.82);
+        --text: #102033;
+        --muted: #5d6b7b;
         --primary: #0f766e;
-        --primary-dark: #0f5f59;
-        --secondary: #c26d13;
-        --border: rgba(15, 118, 110, 0.16);
+        --primary-dark: #0d5f67;
+        --primary-soft: rgba(15, 118, 110, 0.12);
+        --secondary: #c87a2b;
+        --secondary-soft: rgba(200, 122, 43, 0.12);
+        --ink-soft: rgba(16, 32, 51, 0.08);
+        --border: rgba(20, 53, 91, 0.12);
         --danger: #b42318;
         --success: #027a48;
-        --shadow: 0 24px 48px rgba(28, 43, 77, 0.12);
-        --shadow-soft: 0 16px 32px rgba(28, 43, 77, 0.08);
+        --shadow: 0 30px 70px rgba(20, 45, 89, 0.12);
+        --shadow-soft: 0 18px 40px rgba(20, 45, 89, 0.08);
+        --shadow-card: 0 20px 44px rgba(19, 43, 83, 0.1);
         --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        --radius-xl: 30px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
       }
 
       html {
@@ -3518,12 +3538,13 @@ function renderPage({
 
       body {
         margin: 0;
-        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 24%),
-          radial-gradient(circle at top right, rgba(180, 83, 9, 0.16), transparent 18%),
-          linear-gradient(135deg, var(--bg-1), var(--bg-2) 52%, #f9f6ef);
+          radial-gradient(circle at 12% 16%, rgba(15, 118, 110, 0.16), transparent 0 24%),
+          radial-gradient(circle at 86% 8%, rgba(200, 122, 43, 0.16), transparent 0 18%),
+          radial-gradient(circle at 80% 78%, rgba(17, 94, 89, 0.09), transparent 0 22%),
+          linear-gradient(145deg, var(--bg-1), var(--bg-2) 56%, var(--bg-3));
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
@@ -3548,62 +3569,70 @@ function renderPage({
       body::after {
         content: "";
         position: fixed;
-        width: 360px;
-        height: 360px;
         border-radius: 999px;
-        filter: blur(20px);
         pointer-events: none;
         z-index: 0;
-        opacity: 0.55;
+        opacity: 0.7;
         animation: drift 18s ease-in-out infinite alternate;
       }
 
       body::before {
-        top: -120px;
-        right: -80px;
-        background: radial-gradient(circle, rgba(15, 118, 110, 0.14), transparent 68%);
+        width: 540px;
+        height: 540px;
+        top: -140px;
+        right: -120px;
+        background: radial-gradient(circle, rgba(15, 118, 110, 0.12), transparent 66%);
+        filter: blur(10px);
       }
 
       body::after {
+        width: 420px;
+        height: 420px;
         left: -120px;
-        bottom: -140px;
-        background: radial-gradient(circle, rgba(194, 109, 19, 0.12), transparent 68%);
+        bottom: -150px;
+        background: radial-gradient(circle, rgba(200, 122, 43, 0.12), transparent 68%);
+        filter: blur(12px);
         animation-duration: 22s;
       }
 
       a {
         color: var(--primary-dark);
         text-decoration: none;
-        transition: color 180ms var(--ease-out);
+        transition: color 180ms var(--ease-out), opacity 180ms var(--ease-out);
       }
 
       a:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        opacity: 0.9;
       }
 
       button,
       .button {
+        position: relative;
+        overflow: hidden;
         border: none;
         border-radius: 999px;
         padding: 12px 18px;
-        background: linear-gradient(135deg, var(--primary), #155e75);
+        background: linear-gradient(135deg, var(--primary), #115f77 58%, #14476b);
         color: white;
         cursor: pointer;
         font-weight: 700;
+        letter-spacing: 0.01em;
         text-decoration: none;
         transition:
           transform 180ms var(--ease-out),
           box-shadow 180ms var(--ease-out),
           background 180ms var(--ease-out),
           border-color 180ms var(--ease-out),
-          color 180ms var(--ease-out);
-        box-shadow: 0 14px 24px rgba(15, 118, 110, 0.16);
+          color 180ms var(--ease-out),
+          opacity 180ms var(--ease-out);
+        box-shadow: 0 14px 28px rgba(17, 95, 119, 0.2);
       }
 
       button:hover,
       .button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 18px 30px rgba(15, 118, 110, 0.22);
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 20px 34px rgba(17, 95, 119, 0.24);
       }
 
       button:active,
@@ -3613,9 +3642,10 @@ function renderPage({
 
       .button.secondary,
       .nav-link {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.74);
         color: var(--primary-dark);
-        border: 1px solid rgba(15, 118, 110, 0.2);
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        box-shadow: 0 8px 20px rgba(15, 118, 110, 0.08);
       }
 
       .button.danger {
@@ -3627,9 +3657,9 @@ function renderPage({
       }
 
       .app-shell {
-        width: min(1200px, calc(100% - 32px));
+        width: min(1280px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 24px 0 56px;
+        padding: 20px 0 64px;
         position: relative;
         z-index: 1;
       }
@@ -3639,39 +3669,47 @@ function renderPage({
         justify-content: space-between;
         align-items: center;
         gap: 16px;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
         padding: 14px 18px;
-        border-radius: 26px;
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(255, 255, 255, 0.58);
         box-shadow: var(--shadow-soft);
         backdrop-filter: blur(18px);
+        position: sticky;
+        top: 16px;
+        z-index: 30;
       }
 
       .brand {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
       }
 
       .brand-mark {
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background:
+          linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0)) padding-box,
+          linear-gradient(135deg, var(--primary), #165b72 58%, var(--secondary)) border-box;
+        border: 1px solid transparent;
         color: white;
         font-weight: 800;
-        box-shadow: 0 16px 24px rgba(15, 118, 110, 0.2);
+        letter-spacing: 0.04em;
+        box-shadow: 0 16px 28px rgba(15, 118, 110, 0.22);
         animation: pulseMark 5.5s ease-in-out infinite;
       }
 
       .brand h1 {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         margin: 0;
         white-space: nowrap;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
+        font-weight: 800;
       }
 
       .topbar-controls {
@@ -3691,17 +3729,19 @@ function renderPage({
       .language-bar {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         padding: 6px;
         border-radius: 999px;
-        border: 1px solid rgba(15, 118, 110, 0.14);
-        background: rgba(255, 255, 255, 0.88);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        background: rgba(246, 249, 255, 0.88);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.8),
+          0 8px 18px rgba(20, 45, 89, 0.06);
       }
 
       .language-button {
-        min-width: 74px;
-        padding: 10px 12px;
+        min-width: 72px;
+        padding: 9px 12px;
         border-radius: 999px;
         background: transparent;
         color: var(--primary-dark);
@@ -3711,7 +3751,7 @@ function renderPage({
         align-items: center;
         justify-content: center;
         gap: 8px;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 800;
       }
 
@@ -3733,16 +3773,29 @@ function renderPage({
       }
 
       .hero {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,0.9), rgba(247,251,255,0.82) 58%, rgba(248,241,232,0.8)),
+          var(--surface);
+        border: 1px solid rgba(255,255,255,0.74);
+        border-radius: var(--radius-xl);
         box-shadow: var(--shadow);
-        padding: 28px;
+        padding: 34px;
         margin-bottom: 24px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(18px);
         position: relative;
         overflow: hidden;
         animation: revealUp 520ms var(--ease-out) both;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: auto -8% -26% auto;
+        width: 340px;
+        height: 340px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(15, 118, 110, 0.12), transparent 66%);
+        pointer-events: none;
       }
 
       .hero::after {
@@ -3750,16 +3803,20 @@ function renderPage({
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(120deg, rgba(255, 255, 255, 0.38), transparent 30%),
-          radial-gradient(circle at 80% 20%, rgba(15, 118, 110, 0.09), transparent 24%);
+          linear-gradient(120deg, rgba(255, 255, 255, 0.52), transparent 28%),
+          radial-gradient(circle at 82% 20%, rgba(15, 118, 110, 0.08), transparent 22%),
+          linear-gradient(transparent 0 calc(100% - 1px), rgba(18, 45, 78, 0.04) calc(100% - 1px)),
+          linear-gradient(90deg, transparent 0 calc(100% - 1px), rgba(18, 45, 78, 0.035) calc(100% - 1px));
+        background-size: auto, auto, 100% 42px, 42px 100%;
         pointer-events: none;
       }
 
       .hero h2 {
-        margin: 10px 0 12px;
-        font-size: clamp(2rem, 4vw, 3.8rem);
-        line-height: 1.05;
+        margin: 12px 0 14px;
+        font-size: clamp(2.3rem, 4.6vw, 4.4rem);
+        line-height: 0.98;
         max-width: 14ch;
+        letter-spacing: -0.05em;
       }
 
       .hero h2.nowrap {
@@ -3771,9 +3828,10 @@ function renderPage({
 
       .hero p {
         margin: 0;
-        line-height: 1.6;
+        line-height: 1.7;
         color: var(--muted);
-        max-width: 70ch;
+        max-width: 68ch;
+        font-size: 1rem;
       }
 
       .hero-meta {
@@ -3781,26 +3839,40 @@ function renderPage({
         gap: 10px;
         align-items: center;
         border-radius: 999px;
-        padding: 8px 12px;
-        background: rgba(15, 118, 110, 0.08);
+        padding: 9px 14px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(20, 53, 91, 0.08);
         color: var(--primary-dark);
         font-size: 14px;
         font-weight: 700;
+        box-shadow: 0 12px 24px rgba(20, 45, 89, 0.08);
       }
 
       .panel {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        box-shadow: var(--shadow);
-        padding: 22px;
-        backdrop-filter: blur(10px);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.92), rgba(250,252,255,0.78)),
+          var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+        padding: 24px;
+        backdrop-filter: blur(16px);
         transition:
           transform 220ms var(--ease-out),
           box-shadow 220ms var(--ease-out),
           border-color 220ms var(--ease-out),
           background 220ms var(--ease-out);
         animation: revealUp 560ms var(--ease-out) both;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(15, 118, 110, 0.2), rgba(200, 122, 43, 0.14), transparent 90%);
       }
 
       .panel:hover,
@@ -3808,8 +3880,8 @@ function renderPage({
       .catalog-entry:hover,
       .course-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 28px 42px rgba(28, 43, 77, 0.16);
-        border-color: rgba(15, 118, 110, 0.24);
+        box-shadow: 0 28px 54px rgba(18, 43, 78, 0.14);
+        border-color: rgba(15, 118, 110, 0.16);
       }
 
       .compact-panel {
@@ -3822,7 +3894,7 @@ function renderPage({
       }
 
       .stats-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         margin-bottom: 24px;
       }
 
@@ -3841,6 +3913,74 @@ function renderPage({
       .stack {
         display: grid;
         gap: 16px;
+      }
+
+      .stat-card {
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        isolation: isolate;
+      }
+
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        right: -26px;
+        bottom: -34px;
+        width: 120px;
+        height: 120px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(255,255,255,0.74), transparent 70%);
+        opacity: 0.55;
+        z-index: -1;
+      }
+
+      .stat-tone-1 {
+        background: linear-gradient(180deg, rgba(236, 253, 245, 0.94), rgba(255,255,255,0.86));
+      }
+
+      .stat-tone-2 {
+        background: linear-gradient(180deg, rgba(239, 246, 255, 0.94), rgba(255,255,255,0.86));
+      }
+
+      .stat-tone-3 {
+        background: linear-gradient(180deg, rgba(255, 247, 237, 0.94), rgba(255,255,255,0.86));
+      }
+
+      .stat-tone-4 {
+        background: linear-gradient(180deg, rgba(245, 243, 255, 0.94), rgba(255,255,255,0.86));
+      }
+
+      .stat-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .stat-pulse {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        box-shadow: 0 0 0 8px rgba(15, 118, 110, 0.08);
+      }
+
+      .stat-value-row {
+        margin: 10px 0 6px;
+      }
+
+      .stat-value {
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        margin: 0;
+      }
+
+      .stat-detail {
+        margin: 0;
+        max-width: 28ch;
       }
 
       .stat-card h3,
@@ -3870,8 +4010,8 @@ function renderPage({
       .meta-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px 16px;
-        margin: 12px 0 16px;
+        gap: 10px 12px;
+        margin: 14px 0 18px;
         font-size: 14px;
       }
 
@@ -3889,10 +4029,12 @@ function renderPage({
         gap: 8px;
         padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(15, 118, 110, 0.08);
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(20, 53, 91, 0.08);
         color: var(--primary-dark);
         font-size: 13px;
         font-weight: 700;
+        box-shadow: 0 10px 24px rgba(20, 45, 89, 0.06);
       }
 
       .status-badge.offline {
@@ -3928,9 +4070,11 @@ function renderPage({
 
       .message {
         border-radius: 18px;
-        padding: 14px 18px;
+        padding: 15px 18px;
         margin-bottom: 18px;
         font-weight: 600;
+        border: 1px solid transparent;
+        box-shadow: 0 12px 28px rgba(20, 45, 89, 0.08);
       }
 
       .message.notice {
@@ -3956,19 +4100,38 @@ function renderPage({
       label {
         display: grid;
         gap: 8px;
-        font-weight: 600;
+        font-weight: 700;
+        color: var(--text);
       }
 
       input,
       textarea,
       select {
         width: 100%;
-        border: 1px solid rgba(85, 99, 112, 0.22);
+        border: 1px solid rgba(20, 53, 91, 0.12);
         border-radius: 16px;
-        padding: 12px 14px;
-        background: var(--surface-strong);
+        padding: 13px 15px;
+        background: rgba(255, 255, 255, 0.86);
         font: inherit;
         color: var(--text);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+        transition:
+          border-color 180ms var(--ease-out),
+          box-shadow 180ms var(--ease-out),
+          background 180ms var(--ease-out),
+          transform 180ms var(--ease-out);
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: rgba(15, 118, 110, 0.34);
+        box-shadow:
+          0 0 0 4px rgba(15, 118, 110, 0.08),
+          0 16px 28px rgba(15, 118, 110, 0.08);
+        background: rgba(255,255,255,0.96);
+        transform: translateY(-1px);
       }
 
       textarea {
@@ -3981,18 +4144,21 @@ function renderPage({
         gap: 12px;
         flex-wrap: wrap;
         align-items: center;
+        margin-top: 10px;
       }
 
       .table-wrap {
         overflow-x: auto;
+        border-radius: 20px;
       }
 
       .table-wrap.scroll-panel {
-        max-height: 420px;
+        max-height: 460px;
         overflow: auto;
-        border: 1px solid rgba(85, 99, 112, 0.12);
+        border: 1px solid rgba(20, 53, 91, 0.08);
         border-radius: 20px;
-        background: rgba(255, 255, 255, 0.72);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
         scrollbar-width: thin;
         scrollbar-color: rgba(15, 118, 110, 0.32) rgba(15, 118, 110, 0.08);
       }
@@ -4012,7 +4178,11 @@ function renderPage({
         flex-wrap: wrap;
         gap: 12px;
         align-items: center;
-        margin: 16px 0 12px;
+        margin: 18px 0 14px;
+        padding: 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(20, 53, 91, 0.08);
+        background: rgba(247, 250, 255, 0.78);
       }
 
       .filter-row input,
@@ -4024,6 +4194,7 @@ function renderPage({
         color: var(--muted);
         font-size: 14px;
         margin-left: auto;
+        font-weight: 700;
       }
 
       .pagination-row {
@@ -4050,11 +4221,12 @@ function renderPage({
         border: 1px solid rgba(15, 118, 110, 0.18);
         border-radius: 999px;
         padding: 8px 12px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.94);
         color: var(--primary-dark);
         cursor: pointer;
         font: inherit;
         font-weight: 700;
+        box-shadow: 0 8px 16px rgba(20, 45, 89, 0.05);
       }
 
       .page-number-button.active {
@@ -4074,11 +4246,12 @@ function renderPage({
         border: 1px solid rgba(15, 118, 110, 0.18);
         border-radius: 999px;
         padding: 10px 16px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.94);
         color: var(--primary-dark);
         cursor: pointer;
         font: inherit;
         font-weight: 700;
+        box-shadow: 0 8px 16px rgba(20, 45, 89, 0.05);
       }
 
       .tab-button.active {
@@ -4094,17 +4267,17 @@ function renderPage({
 
       .page-menu {
         position: sticky;
-        top: 12px;
+        top: 92px;
         z-index: 20;
         display: flex;
         gap: 12px;
         overflow-x: auto;
         padding: 12px;
-        border-radius: 22px;
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.92);
-        box-shadow: 0 16px 30px rgba(28, 43, 77, 0.08);
-        backdrop-filter: blur(12px);
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        background: rgba(255, 255, 255, 0.74);
+        box-shadow: 0 18px 32px rgba(20, 45, 89, 0.08);
+        backdrop-filter: blur(16px);
         scrollbar-width: none;
       }
 
@@ -4117,12 +4290,13 @@ function renderPage({
         border: 1px solid rgba(15, 118, 110, 0.18);
         border-radius: 999px;
         padding: 11px 18px;
-        background: rgba(255, 255, 255, 0.96);
+        background: rgba(255, 255, 255, 0.94);
         color: var(--primary-dark);
         cursor: pointer;
         font: inherit;
         font-weight: 700;
         white-space: nowrap;
+        box-shadow: 0 8px 16px rgba(20, 45, 89, 0.05);
       }
 
       .page-menu-button.active {
@@ -4148,6 +4322,7 @@ function renderPage({
         max-height: 760px;
         overflow: auto;
         padding-right: 4px;
+        scrollbar-width: thin;
       }
 
       .collapsible-panel {
@@ -4159,6 +4334,7 @@ function renderPage({
         list-style: none;
         cursor: pointer;
         padding: 22px;
+        transition: background 180ms var(--ease-out);
       }
 
       .collapsible-panel summary::-webkit-details-marker {
@@ -4167,6 +4343,7 @@ function renderPage({
 
       .collapsible-panel[open] summary {
         border-bottom: 1px solid rgba(85, 99, 112, 0.12);
+        background: rgba(247, 250, 255, 0.52);
       }
 
       .collapsible-header {
@@ -4201,6 +4378,10 @@ function renderPage({
         justify-content: flex-end;
         gap: 12px;
         margin: 0 0 18px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        background: rgba(247, 250, 255, 0.76);
+        border: 1px solid rgba(20, 53, 91, 0.08);
       }
 
       .section-meta {
@@ -4218,21 +4399,24 @@ function renderPage({
       th,
       td {
         text-align: left;
-        padding: 14px 12px;
-        border-bottom: 1px solid rgba(85, 99, 112, 0.12);
+        padding: 15px 14px;
+        border-bottom: 1px solid rgba(20, 53, 91, 0.08);
         vertical-align: top;
       }
 
       th {
         color: var(--primary-dark);
-        background: rgba(15, 118, 110, 0.06);
+        background: linear-gradient(180deg, rgba(237, 246, 250, 0.96), rgba(247, 250, 255, 0.94));
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       .announcement {
-        border: 1px solid rgba(85, 99, 112, 0.14);
-        border-radius: 18px;
-        padding: 16px;
-        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(20, 53, 91, 0.09);
+        border-radius: 20px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.78);
         transition:
           transform 220ms var(--ease-out),
           box-shadow 220ms var(--ease-out),
@@ -4240,10 +4424,10 @@ function renderPage({
       }
 
       .catalog-entry {
-        border: 1px solid rgba(85, 99, 112, 0.14);
+        border: 1px solid rgba(20, 53, 91, 0.08);
         border-radius: 18px;
-        padding: 14px;
-        background: rgba(255, 255, 255, 0.78);
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.8);
         transition:
           transform 220ms var(--ease-out),
           box-shadow 220ms var(--ease-out),
@@ -4270,6 +4454,10 @@ function renderPage({
         margin: 0;
         color: var(--muted);
         font-style: italic;
+        padding: 18px 20px;
+        border: 1px dashed rgba(20, 53, 91, 0.12);
+        border-radius: 18px;
+        background: rgba(247, 250, 255, 0.7);
       }
 
       .question-card {
@@ -4304,12 +4492,107 @@ function renderPage({
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
+      .course-hero-grid .panel {
+        min-height: 220px;
+      }
+
+      .course-hero-grid .panel h3 {
+        font-size: clamp(1.55rem, 2vw, 2rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .course-hero-grid .helper,
+      .course-hero-grid p {
+        max-width: 32ch;
+      }
+
+      .auth-panel {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .auth-panel h3 {
+        font-size: 1.7rem;
+        letter-spacing: -0.04em;
+        margin-bottom: 6px;
+      }
+
+      .course-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .course-card::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, rgba(15,118,110,0.9), rgba(200,122,43,0.72));
+      }
+
+      .course-card-undergraduate::after {
+        background: linear-gradient(90deg, rgba(15,118,110,0.9), rgba(56,189,248,0.75));
+      }
+
+      .course-card-graduate::after {
+        background: linear-gradient(90deg, rgba(200,122,43,0.92), rgba(15,118,110,0.72));
+      }
+
+      .course-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .course-card-top h3 {
+        margin-bottom: 6px;
+      }
+
+      .course-description {
+        margin: 8px 0 0;
+      }
+
+      .course-meta-list {
+        gap: 10px;
+      }
+
+      .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: rgba(247, 250, 255, 0.94);
+        border: 1px solid rgba(20, 53, 91, 0.08);
+        box-shadow: 0 6px 14px rgba(20, 45, 89, 0.04);
+      }
+
+      .course-count-chip {
+        white-space: nowrap;
+      }
+
+      .course-actions {
+        margin-top: auto;
+        padding-top: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
       .mono {
         font-family: "SFMono-Regular", "Menlo", monospace;
       }
 
       tbody tr:hover {
-        background: rgba(15, 118, 110, 0.05);
+        background: rgba(15, 118, 110, 0.045);
+      }
+
+      tbody tr:nth-child(even) {
+        background: rgba(248, 250, 255, 0.68);
       }
 
       @media (max-width: 720px) {
@@ -4337,8 +4620,12 @@ function renderPage({
         }
 
         .page-menu {
-          top: 8px;
+          top: 74px;
           padding: 10px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -5816,7 +6103,7 @@ app.get(
     }
 
     const content = `
-      <section class="panel" style="max-width: 480px; margin: 0 auto;">
+      <section class="panel auth-panel">
         <h3>Login</h3>
         <form method="post" action="/login">
           <label>
